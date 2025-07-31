@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SchemaHost - Schema</title>
+        <link rel="stylesheet" href="/styles.css">
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+        <script type="module" src="https://jamesaduncan.github.io/schema-elements/index.mjs"></script>
+    </head>
+
+    <body id="schema" itemscope itemtype="https://schema.host/Schema">
+        <header>
+            <h1>Schema Host - <span itemprop="name">Schema</span></h1>
+        </header>
+
+        <nav>
+            <menu itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a href="/">Home</a>
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a id="a" itemprop="Schema" href="https://schema.host/Schema">Schema</a>
+                </li>
+            </menu>
+        </nav>
+
+        <main>
+
+            <p itemprop="description">Schema.org Microdata Schema</p>
+
+            <table>
+                <caption>Properties of the Schema schema</caption>
+                <thead>
+                    <tr>
+                        <th>Property Name</th>
+                        <th>Type</th>
+                        <th>Cardinality</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr itemprop="property" itemscope itemtype="https://schema.host/Property">
+                        <td itemprop="name">name</td>
+                        <td itemprop="type"><a href="/Text">Text</a></td>
+                        <td itemprop="cardinality">1</td>
+                        <td itemprop="description">The name of the schema.</td>
+                    </tr>
+                    
+                    <tr itemprop="property" itemscope itemtype="https://schema.host/Property">
+                        <td itemprop="name">description</td>
+                        <td itemprop="type"><a href="/Text">Text</a></td>
+                        <td itemprop="cardinality">1</td>
+                        <td itemprop="description">the purpose of the schema</td>
+                    </tr>
+                    
+                    <tr itemprop="property" itemscope itemtype="https://schema.host/Property">
+                        <td itemprop="name">property</td>
+                        <td itemprop="type"><a href="/Property">Property</a></td>
+                        <td itemprop="cardinality">0..n</td>
+                        <td itemprop="description">properties of a schema</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+
+        
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 Schema Host</p>
+        </footer>
+    </body>
+
+</html>

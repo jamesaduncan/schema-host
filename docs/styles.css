@@ -1,0 +1,124 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 14px;
+    line-height: 1.5;
+    color: #24292e;
+    background-color: #fff;
+    font-size: 1.2em;
+}
+
+a {
+    text-decoration: none;
+    color: #0366d6;
+}
+
+body>header,
+body>footer,
+body>nav,
+main {
+    width: 50%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+body>nav>menu {
+    margin-left: 0;
+    padding-left: 2ch;
+    list-style-type: "> ";
+}
+
+body>nav>menu li a {
+    text-decoration: none;
+    color: #0366d6;
+}
+
+body>footer {
+    border-top: 1px solid black;
+    font-size: 0.5em;
+}
+
+body>header {
+    border-bottom: 1px solid black;
+    padding-bottom: 0;
+}
+
+body>header:not(:has( + nav)) h1 {
+    margin-bottom: -0.3em;
+}
+
+body>header:has( + nav) h1 {
+    margin-bottom: 0;
+}
+
+ul {
+    list-style-type: "- ";
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+menu[itemtype='https://schema.org/BreadcrumbList'] {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.9em;
+    color: #0366d6;
+    border-bottom: 1px solid black;
+}
+
+menu[itemtype='https://schema.org/BreadcrumbList'] {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+}
+
+menu[itemtype='https://schema.org/BreadcrumbList'] li {
+    display: inline;
+}
+
+menu[itemtype='https://schema.org/BreadcrumbList'] li+li:before {
+    content: " > ";
+    color: #8c8c8c;
+}
+
+main ul.types li:last-child:after {
+    content: ".";
+}
+
+main {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+[itemscope][itemtype] table {
+    font-size: 0.8em;
+    width: 100%;
+    border-collapse: collapse;
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+    td {
+        padding: 0.5em;
+    }
+    td:not(:last-child) {
+        border-right: 1px solid #ddd;
+    }
+    thead tr {
+        background-color: #f2f2f2;
+    }
+}
+
+ul.set {
+    display: inline;
+    padding: 0;
+    margin: 0;
+}
+
+ul.set li {
+    display: inline;
+}
+
+ul.set li:not(:last-of-type):after {
+    content: ", ";
+}
