@@ -16,7 +16,7 @@ body>header,
 body>footer,
 body>nav,
 main {
-    width: 50%;
+    width: 80%;
     max-width: 1200px;
     margin: 0 auto;
 }
