@@ -1,0 +1,30 @@
+{
+  "name": "schema-host",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Essential Schemas & Types for Microdata Schemas",
+  "keywords": [
+    "schemas",
+    "microdata"
+  ],
+  "homepage": "https://github.com/jamesaduncan/schema-host#readme",
+  "bugs": {
+    "url": "https://github.com/jamesaduncan/schema-host/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamesaduncan/schema-host.git"
+  },
+  "license": "MIT",
+  "author": "James A. Duncan <james@kinburnstreet.consulting>",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "run": "npx @11ty/eleventy --input=src --output=docs --config=./eleventy.config.mjs",
+    "test": "npx @11ty/eleventy --input=src --output=docs --config=./eleventy.config.mjs && npx cspell --no-progress --no-summary --show-suggestions docs",
+    "dev": "npx @11ty/eleventy --input=src --output=docs --config=./eleventy.config.mjs --serve --watch"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^3.1.2"
+  }
+}

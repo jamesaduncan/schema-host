@@ -1,0 +1,115 @@
+[
+    {
+        "@type": "Schema",
+        "@context": "https://schema.host/",
+        "name": "Property",
+        "description": "Microdata that describes a property in a schema.",
+        "property": [
+            {
+                "@type": "Property",
+                "@context": "https://schema.host/",
+                "name": "id",
+                "description": "A name for the property",
+                "cardinality": "1",
+                "type": "https://schema.host/URL"
+            },
+            {
+                "@type": "Property",
+                "@context": "https://schema.host/",
+                "name": "name",
+                "description": "A name for the property",
+                "cardinality": "1",
+                "type": "https://schema.host/Text"
+            },
+            {
+                "@type": "Property",
+                "@context": "https://schema.host/",
+                "name": "type",
+                "description": "A type for the property",
+                "cardinality": "1",
+                "type": "https://schema.host/URL"
+
+            },
+            {
+                "@type": "Property",
+                "@context": "https://schema.host/",
+                "name": "cardinality",
+                "description": "The cardinality of the property",
+                "cardinality": "1",
+                "type": "https://schema.host/Cardinal"
+            },
+            {
+                "@type": "Property",
+                "@context": "https://schema.host/",
+                "name": "description",
+                "description": "A description of the property",
+                "cardinality": "1",
+                "type": "https://schema.host/Text"
+            }
+        ]
+    },
+    {
+        "@type": "Schema",
+        "@context": "https://schema.host/",
+        "name": "Schema",
+        "description": "Schema.org Microdata Schema",
+        "property": [
+            {
+                "@type": "Property",
+                "@context": "https://schema.host/",
+                "name": "name",
+                "description": "The name of the schema.",
+                "cardinality": "1",
+                "type": "https://schema.host/Text"
+            },
+            {
+                "@type": "Property",
+                "@context": "https://schema.host/",
+                "name": "description",
+                "description": "the purpose of the schema",
+                "cardinality": "1",
+                "type": "https://schema.host/Text"
+            },
+            {
+                "@type": "Property",
+                "@context": "https://schema.host/",
+                "name": "property",
+                "description": "properties of a schema",
+                "cardinality": "0..n",
+                "type": "https://schema.host/Property"
+            }            
+        ]
+    },
+    {
+        "@type": "Schema",
+        "@context": "https://schema.host/",
+        "name": "DataType",
+        "description": "generic microdata schema for any datatype",
+        "property": [
+            {
+                "@type": "Property",
+                "@context": "https://schema.host/",
+                "name": "url",
+                "description": "The type of the datatype",
+                "cardinality": "1",
+                "type": "https://schema.host/DataType/URL"
+            },
+            {
+                "@type": "Property",
+                "@context": "https://schema.host/",
+                "name": "description",
+                "type": "https://schema.host/DataType/Text",
+                "cardinality": 1,
+                "description": "A description of the DataType."
+            },
+            {
+                "@type": "Property",
+                "@context": "https://schema.host/",
+                "name": "validator",
+                "description": "A validation method for the datatype",
+                "cardinality": "1",
+                "type": "https://schema.host/URL"
+            }
+        ]
+    }
+]

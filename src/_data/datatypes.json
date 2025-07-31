@@ -1,0 +1,54 @@
+[
+    {
+        "@type": "DataType",
+        "@context": "https://schema.host/",
+        "name": "Text",
+        "description": "A string of text"
+    },
+    {
+        "@type": "DataType",
+        "@context": "https://schema.host/",
+        "name": "URL",
+        "description": "A W3C valid URL"
+    },
+    {
+        "@type": "DataType",
+        "@context":"https://schema.host/",
+        "name": "Cardinal",
+        "description": "An indicator of cardinality",
+        "enumerator": [
+            "1",
+            "0..1",
+            "0..n",
+            "1..n"
+        ]
+    },
+    {
+        "@type": "DataType",
+        "@context":"https://schema.host/",
+        "name": "Number",
+        "description": "Tests if something is a number"
+    },
+    {
+        "@type": "DataType",
+        "@context":"https://schema.host/",
+        "name": "Boolean",
+        "description": "Tests if something is a boolean value",
+        "enumerator": [
+            "true",
+            "false"
+        ]
+    },
+    {
+        "@type": "DataType",
+        "@context":"https://schema.host/",
+        "name": "DateTime",
+        "description": "Tests if something is an ISO8601 Date Time"
+    },
+    {
+        "@type": "DataType",
+        "@context":"https://schema.host/",
+        "name": "Date",
+        "description": "Tests if something is an ISO8601 Date Time"
+    }
+]
