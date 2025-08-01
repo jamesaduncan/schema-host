@@ -13,10 +13,10 @@ permalink: "/{{ datatype.name }}/"
         <title>SchemaHost - {{ datatype.name }}</title>
         <link rel="stylesheet" href="/styles.css">
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
-        <script type="module" src="https://jamesaduncan.github.io/schema-elements/index.mjs"></script>
+        <script type="module" src="/js/index.mjs"></script>
     </head>
 
-    <body id="{{datatype.name | slugify }}" itemid="{{ schema.id }}" itemscope itemtype="https://schema.host/DataType">
+    <body itemid="{{ schema.id }}" itemscope itemtype="https://schema.host/DataType">
         {% render "header.liquid" with datatype as object %}
 
         <nav>
