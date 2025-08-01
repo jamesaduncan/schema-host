@@ -6,43 +6,54 @@ pagination:
 permalink: "/{{ schema.name }}/index.mjs"
 ---
 import schema from './schema.json' with { type: 'json' };
+import { microdata } from "/js/index.mjs";
 
-const registry = {};
+if (!window.schemaRegistry) {
+    window.schemaRegistry = {};
+}
 
-for ( const prop of schema.property ) {
-    console.log( `processing`, prop)
-    if ( !registry.hasOwnProperty( prop.type ) ) {
-        try {
-            const module = await import( `${ prop.type }/index.mjs` );
-            console.log( module )
-        } catch ( error ) {
-            console.error("Error loading schema: ", prop.type, error);
+const registry = window.schemaRegistry;
+
+async function populateRegistry( aURL ) {
+    const response = await fetch( aURL );
+    if ( response.ok ) {
+        const data = microdata( await response.text() )[0];
+        const validatorURL = data.validator;
+        if ( validatorURL ) {
+            const { validator } = await import( validatorURL );
+            registry[ aURL ] = validator;
+        } else {
+            throw new Error(`No validator found for ${aURL}`);
         }
     }
-    registry[prop.type].push( prop.name );
 }
 
-console.log( registry );
-
-function validateType( value, type ) {
-    console.log( "need to validate type:", type );
-}
-
-export function validator( data ) {
-    if ( !data || typeof data !== 'object' ) {
-        return false;
-    }
-
+export async function validator( toValidate ) {
+    console.log( `Validating ${JSON.stringify(toValidate, null, 2)}` );
     for ( const property of schema.property ) {
-        if ( !data.hasOwnProperty( property.name ) ) {
-            if ( property.cardinality === '1' || property.cardinality === '1..n' ) {
-                return false; // Required property is missing
+        if ( property.cardinality == "1" || property.cardinality == "1..n" ) {
+            if (!toValidate[ property.name ]) {
+                return false;
+            } else {
+                console.log("Property " + property.name + " is present");
+            }
+        } else {
+            console.log(`Property ${property.name} is optional in schema ${schema["@id"]}`);
+        }
+
+        if ( toValidate[ property.name ] ) {
+            const type = property.type;
+            if (!window.schemaRegistry[type]) {
+                await populateRegistry( type );
+            }
+
+            if( !window.schemaRegistry[type]( toValidate[ property.name ] ) ) {
+                console.warn(`Validation failed for property ${property.name} of type ${type} in schema ${schema["@id"]} (Value: ${toValidate[ property.name ]})`);
+                return false;
             }
         }
-
-        const value = data[property.name];
-        if ( !validateType( value, property.type ) ) {
-            return false;
-        }
     }
+    return true;
 }
+
+window.schemaRegistry[schema["@id"]] = validator;

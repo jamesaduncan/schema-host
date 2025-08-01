@@ -7,9 +7,10 @@
         <link rel="stylesheet" href="/styles.css">
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
         <script type="module" src="/js/index.mjs"></script>
+        <script type="module" src="./index.mjs"></script>
     </head>
 
-    <body id="datatype" itemscope itemtype="https://schema.host/Schema">
+    <body itemid="https://schema.host/DataType" itemscope itemtype="https://schema.host/Schema">
                 <header>
             <h1>Schema Host</span> - DataType</h1>
             <h2>Validatable HTML microdata schemas</h2>
@@ -72,16 +73,6 @@
             <p>&copy; 2025 Schema Host</p>
         </footer>
 
-        <script type="module">
-            import { validator } from "./index.mjs"
-            
-            if ( validator({ url: "https://schema.host/Text" }) ) {
-                console.log("Data is valid");
-            } else {
-                console.error("Data is invalid");
-            }
-            
-        </script>
     </body>
 
 </html>

@@ -16,7 +16,7 @@ permalink: "/{{ datatype.name }}/"
         <script type="module" src="https://jamesaduncan.github.io/schema-elements/index.mjs"></script>
     </head>
 
-    <body id="{{datatype.name | slugify }}" itemscope itemtype="https://schema.host/DataType">
+    <body id="{{datatype.name | slugify }}" itemid="{{ schema.id }}" itemscope itemtype="https://schema.host/DataType">
         {% render "header.liquid" with datatype as object %}
 
         <nav>

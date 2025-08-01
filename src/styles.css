@@ -41,15 +41,7 @@ body>header {
     border-bottom: 1px solid black;
     padding-bottom: 0;
 }
-/*
-body>header:not(:has( + nav)) h1 {
-    margin-bottom: -0.3em;
-}
 
-body>header:has( + nav) h1 {
-    margin-bottom: 0;
-}
-*/
 ul {
     list-style-type: "- ";
 }
@@ -98,9 +90,23 @@ main {
     tr {
         border-bottom: 1px solid #ddd;
     }
+
     td {
         padding: 0.5em;
     }
+
+    td:nth-child(3) {
+        text-align: center;
+    }
+    
+    td:nth-child(4) {
+        width: 70%;
+    }
+    
+    td:nth-child(1) {
+        padding-left: 1.5em;
+    }
+    
     td:not(:last-child) {
         border-right: 1px solid #ddd;
     }
@@ -122,3 +128,8 @@ ul.set li {
 ul.set li:not(:last-of-type):after {
     content: ", ";
 }
+
+table caption {
+    display: none;
+}
+

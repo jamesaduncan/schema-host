@@ -43,11 +43,22 @@ function injectProp( obj, prop, value ) {
  * @returns {Object} The populated object.
  */
 function extractThing( doc, el, obj ) {    
+    if ( el.tagName.toLowerCase() == 'script' && el.getAttribute('type') === 'application/json') {
+        try {
+            const json = JSON.parse(el.textContent || el.innerText);
+            if (json && json instanceof Object) {
+                Object.assign(obj, json);
+            }
+        } catch (e) {
+            console.error(`Error parsing JSON-LD script:`, e);
+        }
+        return obj;
+    }
+
     /*
         Get the properties of the thing, but only those that aren't below another itemscope.
         This is to avoid duplicating properties from nested items.
     */
-
     const unfiltered = Array.from( el.querySelectorAll("[itemprop]") );
     const props = unfiltered.filter( (prop) => {
         return prop.parentNode.closest('[itemscope]') == el
@@ -62,31 +73,14 @@ function extractThing( doc, el, obj ) {
         If we have an itemid, then we use it to set the @id
         property of the JSON-LD object.
     */
-    if ( el.getAttribute('itemid') ) {
-        obj["@id"] = el.getAttribute('itemid').trim();
-    }
-
-    /*
-        If we have an id attr on the element, set a magical
-        @id property, that upon obversation will return the
-        property, and set it as a value. This is because
-        HTML/microdata itemid and ids are only sort of the same
-        thing, sometimes.
-    */
-    if (!el.getAttribute('itemid') && el.getAttribute('id')) {
-        Object.defineProperty( obj, "@id", {
-            get: (target, prop, receiver ) => {
-                const base = el.baseURI;
-                const propval = `${base}#${el.getAttribute('id')}`;
-                Object.defineProperty( obj, "@id", {
-                    value: propval,
-                    enumerable: true
-                })
-                return propval;
-            },
-            configurable: true,
-            enumerble: false
-        })
+    if ( el.getAttribute('id') || el.getAttribute('itemid') ) {
+        let id;
+        if ( el.getAttribute('id' ) ) {
+            id = new URL('#' + el.getAttribute('id').trim(), el.baseURI).href;
+        } else {
+            id = el.getAttribute('itemid');
+        }
+        obj["@id"] = id.trim();
     }
 
     if ( el.getAttribute('itemref') ) {
@@ -108,7 +102,7 @@ function extractThing( doc, el, obj ) {
  * Extract the value of a property from an element.
  * If the element has an "itemtype" attribute, it is treated as a nested item.
  * Otherwise, it returns the text content of the element.
- * @param {Object} doc - The Cheerio document object.
+ * @param {Object} doc - The document object
  * @param {Object} prop - The property element to extract data from.
  * @returns {*} The extracted property value.
  */
@@ -132,6 +126,11 @@ function extractProperty( doc, item ) {
     }
 }
 
+function extractForm(form) {
+    const data = new FormData( form );
+    return [ formData.forEach((value, key) => object[key] = value) ];
+}
+
 /**
  * Extract microdata from HTML.
  * Takes an HTML string and optionally, either an array with a list of selectors that
@@ -152,6 +151,11 @@ export function microdata( doc, options ) {
         // If the doc is a string, we assume it's HTML and parse it.
         const parser = new DOMParser();
         doc = parser.parseFromString(doc, 'text/html');
+    }
+
+    if ( doc instanceof HTMLFormElement ) {
+        console.log(`this is a form, totally different`);
+        return extractForm( doc, options );
     }
     
     if ( base ) {

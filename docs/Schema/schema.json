@@ -1,10 +1,19 @@
 {
   "@type": "Schema",
   "@context": "https://schema.host/",
+  "@id": "https://schema.host/Schema",
   "name": "Schema",
   "description": "Schema.org Microdata Schema",
   "validator": "https://schema.host/Schema/index.mjs",
   "property": [
+    {
+      "@type": "Property",
+      "@context": "https://schema.host/",
+      "name": "id",
+      "description": "The fully qualified URL to this schema. Note, this property is special, and can be derived from the baseURI of an element + its id attribute.",
+      "cardinality": "1",
+      "type": "https://schema.host/URL"
+    },
     {
       "@type": "Property",
       "@context": "https://schema.host/",

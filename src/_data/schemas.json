@@ -2,19 +2,12 @@
     {
         "@type": "Schema",
         "@context": "https://schema.host/",
+        "@id": "https://schema.host/Property",
         "name": "Property",
         "description": "Microdata that describes a property in a schema.",
         "validator": "https://schema.host/Property/index.mjs",
         "parent": "https://schema.host/Schema",
         "property": [
-            {
-                "@type": "Property",
-                "@context": "https://schema.host/",
-                "name": "id",
-                "description": "A name for the property",
-                "cardinality": "1",
-                "type": "https://schema.host/URL"
-            },
             {
                 "@type": "Property",
                 "@context": "https://schema.host/",
@@ -53,10 +46,19 @@
     {
         "@type": "Schema",
         "@context": "https://schema.host/",
+        "@id": "https://schema.host/Schema",        
         "name": "Schema",
         "description": "Schema.org Microdata Schema",
         "validator": "https://schema.host/Schema/index.mjs",
         "property": [            
+            {
+                "@type": "Property",
+                "@context": "https://schema.host/",
+                "name": "id",
+                "description": "The fully qualified URL to this schema. Note, this property is special, and can be derived from the baseURI of an element + its id attribute.",
+                "cardinality": "1",
+                "type": "https://schema.host/URL"
+            },
             {
                 "@type": "Property",
                 "@context": "https://schema.host/",
@@ -102,6 +104,8 @@
     {
         "@type": "Schema",
         "@context": "https://schema.host/",
+        "@id": "https://schema.host/DataType",
+
         "name": "DataType",
         "description": "generic microdata schema for any datatype",
         "validator": "https://schema.host/DataType/index.mjs",

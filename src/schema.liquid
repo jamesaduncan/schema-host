@@ -14,9 +14,10 @@ permalink: "/{{ schema.name }}/"
         <link rel="stylesheet" href="/styles.css">
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
         <script type="module" src="/js/index.mjs"></script>
+        <script type="module" src="./index.mjs"></script>
     </head>
 
-    <body id="{{schema.name | downcase }}" itemscope itemtype="https://schema.host/Schema">
+    <body itemid="{{ schema['@id'] }}" itemscope itemtype="https://schema.host/Schema">
         {% render "header.liquid" with schema as object %}
 
         <nav>
@@ -69,16 +70,6 @@ permalink: "/{{ schema.name }}/"
             <p>&copy; 2025 Schema Host</p>
         </footer>
 
-        <script type="module">
-            import { validator } from "./index.mjs"
-            
-            if ( validator({ url: "https://schema.host/Text" }) ) {
-                console.log("Data is valid");
-            } else {
-                console.error("Data is invalid");
-            }
-            
-        </script>
     </body>
 
 </html>
