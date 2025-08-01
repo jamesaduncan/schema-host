@@ -3,7 +3,7 @@
   "@context": "https://schema.host/",
   "@id": "https://schema.host/Schema",
   "name": "Schema",
-  "description": "Schema.org Microdata Schema",
+  "description": "Schema.host Microdata Schema",
   "validator": "https://schema.host/Schema/index.mjs",
   "property": [
     {

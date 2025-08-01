@@ -12,7 +12,7 @@
 
     <body itemid="https://schema.host/DataType" itemscope itemtype="https://schema.host/Schema">
                 <header>
-            <h1>Schema Host</span> - DataType</h1>
+            <h1>Schema Host</span> - <span itemprop="name">DataType</span></h1>
             <h2>Validatable HTML microdata schemas</h2>
         </header>
 
@@ -32,6 +32,21 @@
 
         <main>
             <p itemprop="description">generic microdata schema for any datatype</p>
+
+            <p>
+                The schema can be validated with the JavaScript module at <a itemprop="validator" href="./index.mjs">https://schema.host/DataType/index.mjs</a>.
+
+                <code>
+<pre>
+    import { validator } from 'https://schema.host/DataType/index.mjs';
+    if ( await validator( anElement ) ) {
+        console.log('Element is valid according to the DataType schema.');
+    } else {
+        console.error('Element is invalid according to the DataType schema.');
+    }
+</pre>
+                </code>
+            </p>
 
             
             <p>Inherits from <a href="/Schema">Schema</a></p>

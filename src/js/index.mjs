@@ -151,6 +151,7 @@ export function microdata( doc, options ) {
         // If the doc is a string, we assume it's HTML and parse it.
         const parser = new DOMParser();
         doc = parser.parseFromString(doc, 'text/html');
+        console.log(`Parsed HTML string into a document object.`, doc);
     }
 
     if ( doc instanceof HTMLFormElement ) {

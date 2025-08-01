@@ -37,6 +37,21 @@ permalink: "/{{ schema.name }}/"
         <main>
             <p itemprop="description">{{ schema.description }}</p>
 
+            <p>
+                The schema can be validated with the JavaScript module at <a itemprop="validator" href="./index.mjs">https://schema.host/{{ schema.name }}/index.mjs</a>.
+
+                <code>
+<pre>
+    import { validator } from 'https://schema.host/{{ schema.name }}/index.mjs';
+    if ( await validator( anElement ) ) {
+        console.log('Element is valid according to the {{ schema.name }} schema.');
+    } else {
+        console.error('Element is invalid according to the {{ schema.name }} schema.');
+    }
+</pre>
+                </code>
+            </p>
+
             {% if schema.parent %}
             <p>Inherits from <a href="/{{ schema.parent | split: '/' | last }}">{{ schema.parent | split: '/' | last }}</a></p>
             {% endif %}
