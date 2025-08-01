@@ -42,7 +42,7 @@ permalink: "/{{ datatype.name }}/"
             {% endif %}
 
 
-            {% assign pairs = datatype | striptype | stripkeys: "parent" %}
+            {% assign pairs = datatype | striptype | stripkeys: "parent", "@id" %}
             {% for pair in pairs %}
                 {% assign key = pair[0] %}
                 {% assign value = pair[1] %}
@@ -51,7 +51,7 @@ permalink: "/{{ datatype.name }}/"
                 <ul>
                 {% endif %}
                 <li>
-                    {{ key }} = <ul class="set">{% for elem in value %}
+                    {{ key }}: <ul class="set">{% for elem in value %}
                         <li><span itemprop="{{ key }}">{{ elem }}</span></li>
                     {% endfor %}</ul>
                 </li>
