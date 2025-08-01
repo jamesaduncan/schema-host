@@ -2,6 +2,7 @@ export default async function(eleventyConfig) {
     eleventyConfig.addPassthroughCopy("src/styles.css");
     eleventyConfig.addPassthroughCopy("src/js/*");
     eleventyConfig.addPassthroughCopy("src/Validators/*.mjs");
+    eleventyConfig.addPassthroughCopy("src/CNAME");
 
     console.log(`Adding a filter for sorting`);
     eleventyConfig.addFilter("sortByProperty", ( values, property ) => {
@@ -9,6 +10,14 @@ export default async function(eleventyConfig) {
         let vals = [...values];
         return vals.sort((a, b) => { return a.data[property].toLowerCase().localeCompare(b.data[property].toLowerCase()) });
     });
+
+    eleventyConfig.addFilter("striptype", ( original ) => {
+        const object = {};
+        Object.assign(object, original);
+        ['@type','@context', 'name', 'description', 'validator'].forEach( i => delete object[i] );
+        return object;
+    });
+
 
     eleventyConfig.setServerOptions({
         headers: {

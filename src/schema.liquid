@@ -17,7 +17,7 @@ permalink: "/{{ schema.name }}/"
     </head>
 
     <body id="{{schema.name | downcase }}" itemscope itemtype="https://schema.host/Schema">
-        {% render "header.liquid" %}
+        {% render "header.liquid" with schema as object %}
 
         <nav>
             <menu itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -34,8 +34,6 @@ permalink: "/{{ schema.name }}/"
         </nav>
 
         <main>
-            <h1>{{ schema.name }} Schema</h1>
-
             <p itemprop="description">{{ schema.description }}</p>
 
             <table>
