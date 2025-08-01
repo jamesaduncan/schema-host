@@ -22,16 +22,17 @@ async function populateRegistry( aURL ) {
 }
 
 export async function validator( toValidate ) {
-    console.log( `Validating ${JSON.stringify(toValidate, null, 2)}` );
+    console.log( `Validating ${toValidate}` );
     for ( const property of schema.property ) {
         if ( property.cardinality == "1" || property.cardinality == "1..n" ) {
             if (!toValidate[ property.name ]) {
+                console.warn(`Property ${property.name} is missing in schema ${schema["@id"]}`);
                 return false;
             } else {
-                console.log("Property " + property.name + " is present");
+                //console.log("Property " + property.name + " is present");
             }
         } else {
-            console.log(`Property ${property.name} is optional in schema ${schema["@id"]}`);
+            //console.log(`Property ${property.name} is optional in schema ${schema["@id"]}`);
         }
 
         if ( toValidate[ property.name ] ) {
@@ -46,6 +47,7 @@ export async function validator( toValidate ) {
             }
         }
     }
+    console.log(`Schema ${schema["@id"]} validation passed for ${JSON.stringify(toValidate, null, 2)}`);
     return true;
 }
 
