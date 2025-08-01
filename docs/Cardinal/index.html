@@ -81,7 +81,7 @@
                 import { validator }from "/Cardinal/index.mjs";
 
                 const input =document.querySelector('input');
-                const microdata = document.microdata[0].toJSON();
+                const microdata = document.microdata[0];
 
                 input.addEventListener( "input", () => {
                     span.toggleAttribute('hidden', true);
