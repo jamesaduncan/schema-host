@@ -1,0 +1,181 @@
+
+/**
+ * Convert a schema URL to a type & context.
+ * For example, "http://schema.org/Person" becomes:
+ * {
+ *     "@type": "Person",
+ *     "@context": "http://schema.org/"
+ * }
+ * @param {string} url - The schema URL to convert.
+ * @returns {Object} An object containing "@type" and "@context".
+ */
+function ldifyUrl( url ) {
+    const match = url.match(/^(.+\/)([^\/]+$)/);
+    if ( match ) return { "@type": match[2], "@context": match[1] };
+    return {};
+}
+
+/**
+ * Ensure a property is added to an object as an array or a single value.
+ * @param {Object} obj - The target object.
+ * @param {string} prop - The property name.
+ * @param {*} value - The value to inject.
+ */
+function injectProp( obj, prop, value ) {
+    if ( obj[prop] ) {
+        if ( Array.isArray( obj[prop] ) ) {
+            obj[prop].push( value );
+        } else {
+            obj[prop] = [ obj[prop], value ];
+        }
+    } else {
+        obj[prop] = value;
+    }
+}
+
+/**
+ * Extract the microdata from an element and its children.
+ * The element must have the "itemscope" attribute.
+ * Returns an object with the properties defined by the "itemprop" attributes.
+ * @param {Object} doc - The Cheerio document object.
+ * @param {Object} el - The element to extract data from.
+ * @param {Object} obj - The object to populate with extracted data.
+ * @returns {Object} The populated object.
+ */
+function extractThing( doc, el, obj ) {    
+    /*
+        Get the properties of the thing, but only those that aren't below another itemscope.
+        This is to avoid duplicating properties from nested items.
+    */
+
+    const unfiltered = Array.from( el.querySelectorAll("[itemprop]") );
+    const props = unfiltered.filter( (prop) => {
+        return prop.parentNode.closest('[itemscope]') == el
+    } ); 
+    //console.log(`EL:`, el,`UNFILTERED PROPS: ${Array.from( unfiltered ).map( p => p.getAttribute('itemprop') )}\nFILTERED PROPS: ${Array.from( props ).map( p => p.getAttribute('itemprop') )}`);
+    for ( const prop of Array.from( props ) ) {
+        const propname = prop.getAttribute('itemprop');
+        injectProp( obj, propname, extractProperty( doc, prop ));
+    }
+
+    /*
+        If we have an itemid, then we use it to set the @id
+        property of the JSON-LD object.
+    */
+    if ( el.getAttribute('itemid') ) {
+        obj["@id"] = el.getAttribute('itemid').trim();
+    }
+
+    /*
+        If we have an id attr on the element, set a magical
+        @id property, that upon obversation will return the
+        property, and set it as a value. This is because
+        HTML/microdata itemid and ids are only sort of the same
+        thing, sometimes.
+    */
+    if (!el.getAttribute('itemid') && el.getAttribute('id')) {
+        Object.defineProperty( obj, "@id", {
+            get: (target, prop, receiver ) => {
+                const base = el.baseURI;
+                const propval = `${base}#${el.getAttribute('id')}`;
+                Object.defineProperty( obj, "@id", {
+                    value: propval,
+                    enumerable: true
+                })
+                return propval;
+            },
+            configurable: true,
+            enumerble: false
+        })
+    }
+
+    if ( el.getAttribute('itemref') ) {
+        // If the element has an "itemref" attribute, extract properties from referenced elements
+        const refs = el.getAttribute('itemref').split(/\s+/);
+        for ( const ref of refs ) {
+            // Each ref is an ID of an element in the document
+            doc.querySelectorAll( `#${ref}` ).forEach( ( refEl ) => {
+                const propname = refEl.getAttribute('itemprop');
+                injectProp( obj, propname, extractProperty( doc, refEl ));
+            });
+        }
+    }
+
+    return obj;
+} 
+
+/**
+ * Extract the value of a property from an element.
+ * If the element has an "itemtype" attribute, it is treated as a nested item.
+ * Otherwise, it returns the text content of the element.
+ * @param {Object} doc - The Cheerio document object.
+ * @param {Object} prop - The property element to extract data from.
+ * @returns {*} The extracted property value.
+ */
+function extractProperty( doc, item ) {
+    if ( item.getAttribute('itemtype') ) {
+        return extractThing( doc, item, ldifyUrl( item.getAttribute('itemtype') ) );
+    } else {
+        switch (item.tagName.toLowerCase()) {
+            case 'meta':
+                return item.getAttribute('content').trim() || '';
+            case 'link':
+                return item.getAttribute('href').trim() || '';
+            case 'input':
+                return item.getAttribute('value').trim() || '';
+            case 'select':
+                return item.querySelector('[selected]').innerText.trim() || '';
+            default:
+                return item.innerText.trim();
+            /* ... there are more of these to support ... */
+        }
+    }
+}
+
+/**
+ * Extract microdata from HTML.
+ * Takes an HTML string and optionally, either an array with a list of selectors that
+ *  limits the selection, or an options object that can contain a limiter property that does the same.
+ * The options object can also contain a base property to help fully qualify relative URLs.
+ * Returns an array of objects, each representing an item with its properties.
+ * @param {string} html - The HTML string to parse.
+ * @param {Object|Array} [options] - Optional settings or limiter array.
+ * @param {Array} [options.limiter] - Array of selectors to limit the scope.
+ * @param {string} [options.base] - Base URL for resolving relative URLs.
+ * @returns {Array<Object>} An array of extracted microdata objects.
+ */
+export function microdata( doc, options ) {
+    const limiter = ( options && options.limiter ) ? options.limiter : Array.isArray( options ) ? options : [];
+    const base    = ( options && options.base ) ? options.base : "";
+
+    if ( typeof doc === 'string' ) {
+        // If the doc is a string, we assume it's HTML and parse it.
+        const parser = new DOMParser();
+        doc = parser.parseFromString(doc, 'text/html');
+    }
+    
+    if ( base ) {
+        if ( doc.querySelector('base') ) {
+            doc.querySelector('base').remove();
+        }
+        const b = document.createElement('base');
+        b.setAttribute('href', base);
+        doc.body.insertBefore(b, doc.body.firstChild);
+    }
+
+    const results = [];
+    const selector = limiter.join("") + '[itemscope]';
+
+    const items = doc.querySelectorAll( selector );
+    items.forEach( ( item ) => {
+        const obj = {};
+        if ( item.getAttribute('itemtype') ) {
+            Object.assign( obj, ldifyUrl( item.getAttribute('itemtype') ) );
+        }
+        results.push( extractThing( doc, item, obj ) );
+    });
+
+    return results;
+};
+
+document.microdata = microdata(document);

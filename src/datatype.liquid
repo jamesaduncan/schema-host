@@ -1,19 +1,23 @@
+---
+pagination:
+    data: datatypes
+    size: 1
+    alias: datatype
+permalink: "/{{ datatype.name }}/"
+---
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>SchemaHost - Text</title>
+        <title>SchemaHost - {{ datatype.name }}</title>
         <link rel="stylesheet" href="/styles.css">
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
         <script type="module" src="https://jamesaduncan.github.io/schema-elements/index.mjs"></script>
     </head>
 
-    <body id="text" itemscope itemtype="https://schema.host/DataType">
-                <header>
-            <h1>Schema Host</span></h1>
-            <h2>Validatable HTML microdata schemas</h2>
-        </header>
+    <body id="{{datatype.name | slugify }}" itemscope itemtype="https://schema.host/DataType">
+        {% render "header.liquid" %}
 
         <nav>
             <menu itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -24,47 +28,42 @@
                     <a href="/DataTypes">DataTypes</a>
                 </li>                
                 <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <a id="a" itemprop="Text" href="https://schema.host/Text">Text</a>
+                    <a id="a" itemprop="{{ datatype.name }}" href="https://schema.host/{{ datatype.name }}">{{ datatype.name }}</a>
                 </li>
             </menu>
         </nav>
 
         <main>
-            <h1>Text DataType</h1>
+            <h1>{{ datatype.name }} DataType</h1>
 
-            
-            <p itemprop="description">A string of text</p>
+            {% assign validatorURL = "/Validators/" | append: datatype.name |  append: ".mjs" %}
+            <p itemprop="description">{{ datatype.description }}</p>
 
             <ul>
-            
-                
-                
-                
-                    
-                
-                
-                
-                    
-                
-                
-                
-                    
-                
-                
-                
-                    
+            {% for pair in datatype %}
+                {% assign key = pair[0] %}
+                {% assign value = pair[1] %}
+                {% if key == "name" or key == "description" or key == "validator" or key == "@type" or key == "@context" %}
+                    {% continue %}
+                {% endif %}                
+                    <li>
+                        {{ key }} = <ul class="set">{% for elem in value %}
+                            <li><span itemprop="{{ key }}">{{ elem }}</span></li>
+                        {% endfor %}</ul>
+                    </li>
+                {% endfor %}
             </ul>
 
             <h2>Validation Test</h2>
 
-            <p>The validator for this datatype can be found at: <a href="/Validators/Text.mjs"><span itemprop="validator">https://schema.host/Validators/Text.mjs<span></a></p>
+            <p>The validator for this datatype can be found at: <a href="{{ validatorURL }}"><span itemprop="validator">https://schema.host{{ validatorURL }}<span></a></p>
 
             <form>
                 Test validator: <input id="toValidate" type="text"> <button>Valid?</button> <span class="valid">&#x2611;</span>
             </form>
 
             <script type="module">
-                import * as validator from "/Validators/Text.mjs";
+                import * as validator from "{{ validatorURL}}";
 
                 const input =document.querySelector('input');
                 const microdata = document.microdata[0].toJSON();

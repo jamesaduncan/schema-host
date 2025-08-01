@@ -1,98 +1,16 @@
 ---
-pagination:
-    data: datatypes
-    size: 1
-    alias: datatype
-permalink: "/{{ datatype.name }}/"
+layout: default
+title: Schema Host
+strapline: Validatable HTML microdata schemas
 ---
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>SchemaHost - {{ datatype.name }}</title>
-        <link rel="stylesheet" href="/styles.css">
-        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
-        <script type="module" src="https://jamesaduncan.github.io/schema-elements/index.mjs"></script>
-    </head>
-
-    <body id="{{datatype.name | slugify }}" itemscope itemtype="https://schema.host/DataType">
-        <header>
-            <h1>Schema Host - <span itemprop="name">{{ datatype.name }}</span></h1>
-        </header>
-
-        <nav>
-            <menu itemscope itemtype="https://schema.org/BreadcrumbList">
-                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <a href="/">Home</a>
-                </li>
-                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <a id="a" itemprop="{{ datatype.name }}" href="https://schema.host/{{ datatype.name }}">{{ datatype.name }}</a>
-                </li>
-            </menu>
-        </nav>
-
-        <main>
-            {% assign validatorURL = "/Validators/" | append: datatype.name |  append: ".mjs" %}
-            <p itemprop="description">{{ datatype.description }}</p>
-
-            <h2>Additional Properties</h2>
-            <ul>
-                {% for pair in datatype %}
-                    {% assign key = pair[0] %}
-                    {% assign value = pair[1] %}
-                    {% if key == "name" or key == "description" or key == "validator" or key == "@type" or key == "@context" %}
-                    {% continue %}
-                    {% endif %}                
-                    <li>
-                        {{ key }} = <ul class="set">{% for elem in value %}
-                            <li><span itemprop="{{ key }}">{{ elem }}</span></li>
-                        {% endfor %}</ul>
-                    </li>
-                {% endfor %}
-            </ul>
-
-            <h2>Validation Test</h2>
-
-            <p>The validator for this datatype can be found at: <a href="{{ validatorURL }}"><span itemprop="validator">https://schema.host{{ validatorURL }}<span></a></p>
-
-            <form>
-                Test validator: <input id="toValidate" type="text"> <button>Valid?</button> <span class="valid">&#x2611;</span>
-            </form>
-
-            <script type="module">
-                import * as validator from "{{ validatorURL}}";
-
-                const input =document.querySelector('input');
-                const microdata = document.microdata[0].toJSON();
-
-                input.addEventListener( "input", () => {
-                    span.toggleAttribute('hidden', true);
-                    const result = validator.default.apply(microdata, [ input.value ] );
-                    if ( result ) {
-                        input.setCustomValidity( "" );
-                    } else {
-                        input.setCustomValidity( "Does not pass validation" );
-                    }
-                });
-                const span = document.querySelector('.valid');
-                span.toggleAttribute('hidden', true);
-                const form = document.querySelector( 'form' );
-                form.addEventListener('submit', (e) => {
-                    if ( form.checkValidity() ) {
-                        span.toggleAttribute('hidden', false);
-                    } else {
-                        span.toggleAttribute('hidden', true);
-                    }
-                    e.preventDefault();
-                });
-            </script>
-
-        </main>
-        
-        <footer>
-            <p>&copy; 2025 Schema Host</p>
-        </footer>
-    </body>
-
-</html>
+<main>
+    <h2>Data Types</h2>
+    <ul>
+    {% for datatype in datatypes | sortByProperty: "name" %}
+        <li itemid="/{{ datatype.name }}" itemscope itemtype="https://schema.host/DataType">
+        <a href="/{{ datatype.name }}"><span itemprop="name">{{ datatype.name }}</span></a> 
+            - <span itemprop="description">{{ datatype.description }}</span>
+        </li>
+    {% endfor %}
+    </ul>
+</main>

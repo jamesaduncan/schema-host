@@ -41,7 +41,7 @@ body>header {
     border-bottom: 1px solid black;
     padding-bottom: 0;
 }
-
+/*
 body>header:not(:has( + nav)) h1 {
     margin-bottom: -0.3em;
 }
@@ -49,7 +49,7 @@ body>header:not(:has( + nav)) h1 {
 body>header:has( + nav) h1 {
     margin-bottom: 0;
 }
-
+*/
 ul {
     list-style-type: "- ";
 }

@@ -50,5 +50,11 @@
         "@context":"https://schema.host/",
         "name": "Date",
         "description": "ISO8601 Date"
+    },
+    {
+        "@type": "DataType",
+        "@context":"https://schema.host/",
+        "name": "JSON",
+        "description": "JSON data"
     }
 ]

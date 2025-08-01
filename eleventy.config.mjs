@@ -1,5 +1,6 @@
 export default async function(eleventyConfig) {
     eleventyConfig.addPassthroughCopy("src/styles.css");
+    eleventyConfig.addPassthroughCopy("src/js/*");
     eleventyConfig.addPassthroughCopy("src/Validators/*.mjs");
 
     console.log(`Adding a filter for sorting`);

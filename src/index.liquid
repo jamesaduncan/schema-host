@@ -3,21 +3,23 @@ layout: default
 title: Schema Host
 strapline: Validatable HTML microdata schemas
 ---
-<h2>Schema</h2>
-<ul>
-{% for schema in schemas | sortyByProperty: "name" %}
-    <li itemid="/{{ schema.name }}" itemscope itemtype="https://schema.host/Schema">
-    <a href="/{{ schema.name }}"><span itemprop="name">{{ schema.name }}</span></a> 
-        - <span itemprop="description">{{ schema.description }}</span>
-    </li>
-{% endfor %}
-</ul>
-<h2>Data Types</h2>
-<ul>
-{% for datatype in datatypes | sortByProperty: "name" %}
-    <li itemid="/{{ datatype.name }}" itemscope itemtype="https://schema.host/DataType">
-    <a href="/{{ datatype.name }}"><span itemprop="name">{{ datatype.name }}</span></a> 
-        - <span itemprop="description">{{ datatype.description }}</span>
-    </li>
-{% endfor %}
-</ul>
+<main>
+    <h2><a href="/Schemas">Schemas</a></h2>
+    <ul>
+    {% for schema in schemas | sortByProperty: "name" %}
+        <li itemid="/{{ schema.name }}" itemscope itemtype="https://schema.host/Schema">
+        <a href="/{{ schema.name }}"><span itemprop="name">{{ schema.name }}</span></a> 
+            - <span itemprop="description">{{ schema.description }}</span>
+        </li>
+    {% endfor %}
+    </ul>
+    <h2><a href="/DataTypes">Data Types</a></h2>
+    <ul>
+    {% for datatype in datatypes | sortByProperty: "name" %}
+        <li itemid="/{{ datatype.name }}" itemscope itemtype="https://schema.host/DataType">
+        <a href="/{{ datatype.name }}"><span itemprop="name">{{ datatype.name }}</span></a> 
+            - <span itemprop="description">{{ datatype.description }}</span>
+        </li>
+    {% endfor %}
+    </ul>
+</main>

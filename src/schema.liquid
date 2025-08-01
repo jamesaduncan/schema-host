@@ -1,0 +1,71 @@
+---
+pagination:
+    data: schemas
+    size: 1
+    alias: schema
+permalink: "/{{ schema.name }}/"
+---
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SchemaHost - {{ schema.name }}</title>
+        <link rel="stylesheet" href="/styles.css">
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+        <script type="module" src="/js/index.mjs"></script>
+    </head>
+
+    <body id="{{schema.name | downcase }}" itemscope itemtype="https://schema.host/Schema">
+        {% render "header.liquid" %}
+
+        <nav>
+            <menu itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a href="/">Home</a>
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a href="/Schemas">Schemas</a>
+                </li>                
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a id="a" itemprop="{{ schema.name }}" href="https://schema.host/{{ schema.name }}">{{ schema.name }}</a>
+                </li>
+            </menu>
+        </nav>
+
+        <main>
+            <h1>{{ schema.name }} Schema</h1>
+
+            <p itemprop="description">{{ schema.description }}</p>
+
+            <table>
+                <caption>Properties of the {{ schema.name }} schema</caption>
+                <thead>
+                    <tr>
+                        <th>Property Name</th>
+                        <th>Type</th>
+                        <th>Cardinality</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for property in schema.property %}
+                    <tr itemprop="property" itemscope itemtype="https://schema.host/Property">
+                        <td itemprop="name">{{ property.name }}</td>
+                        <td itemprop="type"><a href="/{{ property['type'] | split: '/' | last }}">{{ property['type'] | split: '/' | last }}</a></td>
+                        <td itemprop="cardinality">{{ property.cardinality }}</td>
+                        <td itemprop="description">{{ property.description }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 Schema Host</p>
+        </footer>
+    </body>
+
+</html>
