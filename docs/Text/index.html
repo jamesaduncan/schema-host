@@ -34,26 +34,31 @@
             <p itemprop="description">A string of text</p>
 
             
+            <p>Inherits from <a href="/DataType">DataType</a></p>
+            
+
+
+            
             
             </ul>
 
             <h2>Validation Test</h2>
 
-            <p>The validator for this datatype can be found at: <a href="/Validators/Text.mjs"><span itemprop="validator">https://schema.host/Validators/Text.mjs<span></a></p>
+            <p>The validator for this datatype can be found at: <a href="/Text/index.mjs"><span itemprop="validator">https://schema.host/Text/index.mjs<span></a></p>
 
             <form>
                 Test validator: <input id="toValidate" type="text"> <button>Valid?</button> <span class="valid">&#x2611;</span>
             </form>
 
             <script type="module">
-                import * as validator from "/Validators/Text.mjs";
+                import { validator }from "/Text/index.mjs";
 
                 const input =document.querySelector('input');
                 const microdata = document.microdata[0].toJSON();
 
                 input.addEventListener( "input", () => {
                     span.toggleAttribute('hidden', true);
-                    const result = validator.default.apply(microdata, [ input.value ] );
+                    const result = validator.apply(microdata, [ input.value ] );
                     if ( result ) {
                         input.setCustomValidity( "" );
                     } else {

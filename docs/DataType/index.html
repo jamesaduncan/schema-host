@@ -32,6 +32,10 @@
         <main>
             <p itemprop="description">generic microdata schema for any datatype</p>
 
+            
+            <p>Inherits from <a href="/Schema">Schema</a></p>
+            
+
             <table>
                 <caption>Properties of the DataType schema</caption>
                 <thead>
@@ -58,13 +62,6 @@
                         <td itemprop="description">A description of the DataType.</td>
                     </tr>
                     
-                    <tr itemprop="property" itemscope itemtype="https://schema.host/Property">
-                        <td itemprop="name">validator</td>
-                        <td itemprop="type"><a href="/URL">URL</a></td>
-                        <td itemprop="cardinality">1</td>
-                        <td itemprop="description">A validation method for the datatype</td>
-                    </tr>
-                    
                 </tbody>
             </table>
 
@@ -74,6 +71,17 @@
         <footer>
             <p>&copy; 2025 Schema Host</p>
         </footer>
+
+        <script type="module">
+            import { validator } from "./index.mjs"
+            
+            if ( validator({ url: "https://schema.host/Text" }) ) {
+                console.log("Data is valid");
+            } else {
+                console.error("Data is invalid");
+            }
+            
+        </script>
     </body>
 
 </html>

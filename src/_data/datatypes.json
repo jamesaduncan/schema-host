@@ -3,19 +3,22 @@
         "@type": "DataType",
         "@context": "https://schema.host/",
         "name": "Text",
-        "description": "A string of text"
+        "description": "A string of text",
+        "parent": "https://schema.host/DataType"
     },
     {
         "@type": "DataType",
         "@context": "https://schema.host/",
         "name": "URL",
-        "description": "A W3C valid URL"
+        "description": "A W3C valid URL",
+        "parent": "https://schema.host/DataType"
     },
     {
         "@type": "DataType",
         "@context":"https://schema.host/",
         "name": "Cardinal",
         "description": "An indicator of cardinality",
+        "parent": "https://schema.host/DataType",
         "enumerator": [
             "1",
             "0..1",
@@ -27,6 +30,7 @@
         "@type": "DataType",
         "@context":"https://schema.host/",
         "name": "Number",
+        "parent": "https://schema.host/DataType",
         "description": "Validates that something is a Number."
     },
     {
@@ -34,6 +38,7 @@
         "@context":"https://schema.host/",
         "name": "Boolean",
         "description": "True, or false",
+        "parent": "https://schema.host/DataType",
         "enumerator": [
             "true",
             "false"
@@ -43,18 +48,21 @@
         "@type": "DataType",
         "@context":"https://schema.host/",
         "name": "DateTime",
+        "parent": "https://schema.host/DataType",
         "description": "ISO8601 Date Time"
     },
     {
         "@type": "DataType",
         "@context":"https://schema.host/",
         "name": "Date",
+        "parent": "https://schema.host/DataType",
         "description": "ISO8601 Date"
     },
     {
         "@type": "DataType",
         "@context":"https://schema.host/",
         "name": "JSON",
+        "parent": "https://schema.host/DataType",
         "description": "JSON data"
     }
 ]

@@ -36,6 +36,10 @@ permalink: "/{{ schema.name }}/"
         <main>
             <p itemprop="description">{{ schema.description }}</p>
 
+            {% if schema.parent %}
+            <p>Inherits from <a href="/{{ schema.parent | split: '/' | last }}">{{ schema.parent | split: '/' | last }}</a></p>
+            {% endif %}
+
             <table>
                 <caption>Properties of the {{ schema.name }} schema</caption>
                 <thead>
@@ -64,6 +68,17 @@ permalink: "/{{ schema.name }}/"
         <footer>
             <p>&copy; 2025 Schema Host</p>
         </footer>
+
+        <script type="module">
+            import { validator } from "./index.mjs"
+            
+            if ( validator({ url: "https://schema.host/Text" }) ) {
+                console.log("Data is valid");
+            } else {
+                console.error("Data is invalid");
+            }
+            
+        </script>
     </body>
 
 </html>

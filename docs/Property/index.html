@@ -32,6 +32,10 @@
         <main>
             <p itemprop="description">Microdata that describes a property in a schema.</p>
 
+            
+            <p>Inherits from <a href="/Schema">Schema</a></p>
+            
+
             <table>
                 <caption>Properties of the Property schema</caption>
                 <thead>
@@ -88,6 +92,17 @@
         <footer>
             <p>&copy; 2025 Schema Host</p>
         </footer>
+
+        <script type="module">
+            import { validator } from "./index.mjs"
+            
+            if ( validator({ url: "https://schema.host/Text" }) ) {
+                console.log("Data is valid");
+            } else {
+                console.error("Data is invalid");
+            }
+            
+        </script>
     </body>
 
 </html>

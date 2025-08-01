@@ -32,6 +32,8 @@
         <main>
             <p itemprop="description">Schema.org Microdata Schema</p>
 
+            
+
             <table>
                 <caption>Properties of the Schema schema</caption>
                 <thead>
@@ -49,6 +51,20 @@
                         <td itemprop="type"><a href="/Text">Text</a></td>
                         <td itemprop="cardinality">1</td>
                         <td itemprop="description">The name of the schema.</td>
+                    </tr>
+                    
+                    <tr itemprop="property" itemscope itemtype="https://schema.host/Property">
+                        <td itemprop="name">parent</td>
+                        <td itemprop="type"><a href="/URL">URL</a></td>
+                        <td itemprop="cardinality">0..1</td>
+                        <td itemprop="description">The parent of the schema, allowing for schema inheritance.</td>
+                    </tr>
+                    
+                    <tr itemprop="property" itemscope itemtype="https://schema.host/Property">
+                        <td itemprop="name">validator</td>
+                        <td itemprop="type"><a href="/URL">URL</a></td>
+                        <td itemprop="cardinality">0..1</td>
+                        <td itemprop="description">The URL to a  validator function</td>
                     </tr>
                     
                     <tr itemprop="property" itemscope itemtype="https://schema.host/Property">
@@ -74,6 +90,17 @@
         <footer>
             <p>&copy; 2025 Schema Host</p>
         </footer>
+
+        <script type="module">
+            import { validator } from "./index.mjs"
+            
+            if ( validator({ url: "https://schema.host/Text" }) ) {
+                console.log("Data is valid");
+            } else {
+                console.error("Data is invalid");
+            }
+            
+        </script>
     </body>
 
 </html>

@@ -34,10 +34,15 @@ permalink: "/{{ datatype.name }}/"
         </nav>
 
         <main>
-            {% assign validatorURL = "/Validators/" | append: datatype.name |  append: ".mjs" %}
+            {% assign validatorURL = "/" | append: datatype.name | append: "/index.mjs" %}
             <p itemprop="description">{{ datatype.description }}</p>
 
-            {% assign pairs = datatype | striptype %}
+            {% if datatype.parent %}
+            <p>Inherits from <a href="/{{ datatype.parent | split: '/' | last }}">{{ datatype.parent | split: '/' | last }}</a></p>
+            {% endif %}
+
+
+            {% assign pairs = datatype | striptype | stripkeys: "parent" %}
             {% for pair in pairs %}
                 {% assign key = pair[0] %}
                 {% assign value = pair[1] %}
@@ -62,14 +67,14 @@ permalink: "/{{ datatype.name }}/"
             </form>
 
             <script type="module">
-                import * as validator from "{{ validatorURL}}";
+                import { validator }from "{{ validatorURL}}";
 
                 const input =document.querySelector('input');
                 const microdata = document.microdata[0].toJSON();
 
                 input.addEventListener( "input", () => {
                     span.toggleAttribute('hidden', true);
-                    const result = validator.default.apply(microdata, [ input.value ] );
+                    const result = validator.apply(microdata, [ input.value ] );
                     if ( result ) {
                         input.setCustomValidity( "" );
                     } else {
