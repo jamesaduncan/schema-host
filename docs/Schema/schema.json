@@ -1,0 +1,49 @@
+{
+  "@type": "Schema",
+  "@context": "https://schema.host/",
+  "name": "Schema",
+  "description": "Schema.org Microdata Schema",
+  "validator": "https://schema.host/Schema/index.mjs",
+  "property": [
+    {
+      "@type": "Property",
+      "@context": "https://schema.host/",
+      "name": "name",
+      "description": "The name of the schema.",
+      "cardinality": "1",
+      "type": "https://schema.host/Text"
+    },
+    {
+      "@type": "Property",
+      "@context": "https://schema.host/",
+      "name": "parent",
+      "description": "The parent of the schema, allowing for schema inheritance.",
+      "cardinality": "0..1",
+      "type": "https://schema.host/URL"
+    },
+    {
+      "@type": "Property",
+      "@context": "https://schema.host/",
+      "name": "validator",
+      "description": "The URL to a  validator function",
+      "cardinality": "0..1",
+      "type": "https://schema.host/URL"
+    },
+    {
+      "@type": "Property",
+      "@context": "https://schema.host/",
+      "name": "description",
+      "description": "the purpose of the schema",
+      "cardinality": "1",
+      "type": "https://schema.host/Text"
+    },
+    {
+      "@type": "Property",
+      "@context": "https://schema.host/",
+      "name": "property",
+      "description": "properties of a schema",
+      "cardinality": "0..n",
+      "type": "https://schema.host/Property"
+    }
+  ]
+}

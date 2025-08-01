@@ -1,0 +1,50 @@
+{
+  "@type": "Schema",
+  "@context": "https://schema.host/",
+  "name": "Property",
+  "description": "Microdata that describes a property in a schema.",
+  "validator": "https://schema.host/Property/index.mjs",
+  "parent": "https://schema.host/Schema",
+  "property": [
+    {
+      "@type": "Property",
+      "@context": "https://schema.host/",
+      "name": "id",
+      "description": "A name for the property",
+      "cardinality": "1",
+      "type": "https://schema.host/URL"
+    },
+    {
+      "@type": "Property",
+      "@context": "https://schema.host/",
+      "name": "name",
+      "description": "A name for the property",
+      "cardinality": "1",
+      "type": "https://schema.host/Text"
+    },
+    {
+      "@type": "Property",
+      "@context": "https://schema.host/",
+      "name": "type",
+      "description": "A type for the property",
+      "cardinality": "1",
+      "type": "https://schema.host/URL"
+    },
+    {
+      "@type": "Property",
+      "@context": "https://schema.host/",
+      "name": "cardinality",
+      "description": "The cardinality of the property",
+      "cardinality": "1",
+      "type": "https://schema.host/Cardinal"
+    },
+    {
+      "@type": "Property",
+      "@context": "https://schema.host/",
+      "name": "description",
+      "description": "A description of the property",
+      "cardinality": "1",
+      "type": "https://schema.host/Text"
+    }
+  ]
+}
