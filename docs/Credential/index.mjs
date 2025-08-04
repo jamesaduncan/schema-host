@@ -29,7 +29,13 @@ export async function validator( toValidate ) {
             console.log(`Need to validate type ${type}`);
             if (!window.schemaRegistry[type]) {
                 console.log(`Don't have a ${type} in the schema registry, going to get it...`);
-                await populateRegistry( type );
+                if ( window.schemaRegistry ) {
+                    console.log(`Schema registry is available, adding ${type} to it...`);
+                    await window.schemaRegistry.add( type );
+                } else {
+                    console.warn("Schema registry is not available, cannot validate type " + type);
+                    return false;
+                }
             }
 
             if (!window.schemaRegistry[type]) {
