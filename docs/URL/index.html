@@ -30,6 +30,8 @@
         </nav>
 
         <main>
+            <base itemprop="url" href="https://schema.host/URL">
+
             
             <p itemprop="description">A W3C valid URL</p>
 
@@ -54,7 +56,7 @@
                 import { validator }from "/URL/index.mjs";
 
                 const input =document.querySelector('input');
-                const microdata = document.microdata[0];
+                const microdata = window.Microdata( document )[0]
 
                 input.addEventListener( "input", () => {
                     span.toggleAttribute('hidden', true);

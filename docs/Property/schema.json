@@ -18,14 +18,6 @@
     {
       "@type": "Property",
       "@context": "https://schema.host/",
-      "name": "type",
-      "description": "A type for the property",
-      "cardinality": "1",
-      "type": "https://schema.host/URL"
-    },
-    {
-      "@type": "Property",
-      "@context": "https://schema.host/",
       "name": "cardinality",
       "description": "The cardinality of the property",
       "cardinality": "1",

@@ -34,6 +34,8 @@ permalink: "/{{ datatype.name }}/"
         </nav>
 
         <main>
+            <base itemprop="url" href="https://schema.host/{{ datatype.name }}">
+
             {% assign validatorURL = "/" | append: datatype.name | append: "/index.mjs" %}
             <p itemprop="description">{{ datatype.description }}</p>
 
@@ -70,7 +72,7 @@ permalink: "/{{ datatype.name }}/"
                 import { validator }from "{{ validatorURL}}";
 
                 const input =document.querySelector('input');
-                const microdata = document.microdata[0];
+                const microdata = window.Microdata( document )[0]
 
                 input.addEventListener( "input", () => {
                     span.toggleAttribute('hidden', true);

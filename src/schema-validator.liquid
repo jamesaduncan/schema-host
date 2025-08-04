@@ -8,38 +8,21 @@ permalink: "/{{ schema.name }}/index.mjs"
 import schema from './schema.json' with { type: 'json' };
 import { microdata } from "/js/index.mjs";
 
-if (!window.schemaRegistry) {
-    window.schemaRegistry = {};
-}
-
-const registry = window.schemaRegistry;
-
-async function populateRegistry( aURL ) {
-    console.log(`going to get schema at ${aURL}`);
-    const response = await fetch( aURL );
-    if ( response.ok ) {
-        const text = await response.text();
-        console.log( text );
-        const data = microdata( text )[0];
-        window.schemaRegistry[ aURL ] = data;
-        const validatorURL = data.validator;
-        if ( validatorURL ) {
-            const { validator } = await import( validatorURL );
-            registry[ aURL ].validator = validator;
-        } else {
-            throw new Error(`No validator found for ${aURL}`);
-        }
-    }
-}
-
 export async function validator( toValidate ) {
+    const THING = toValidate["@context"] + toValidate["@type"];
+    console.log(`Validating ${THING} against schema ${schema["@id"]}`);
+    
+    console.log( toValidate )
+
+
     if ( toValidate instanceof Node ) { // if this is an HTML element, then we want to process it for microdata first.
         toValidate = microdata( toValidate )[0];        
     }
     for ( const property of schema.property ) {
+        console.log(`in validation for property '${property.name} in schema ${THING}'`);
         if ( property.cardinality == "1" || property.cardinality == "1..n" ) {
             if (!toValidate[ property.name ]) {
-                console.warn(`Property ${property.name} is missing in schema ${schema["@id"]}`);
+                console.warn(`Property '${property.name}' is missing in microdata ${schema["@id"]}`);
                 return false;
             } else {
                 //console.log("Property " + property.name + " is present");
@@ -55,13 +38,10 @@ export async function validator( toValidate ) {
                 console.log(`Don't have a ${type} in the schema registry, going to get it...`);
                 await populateRegistry( type );
             }
-            console.log(`Got the schema: ${JSON.stringify(window.schemaRegistry[ type ])}`);
-            window.schemaRegistry[ type ].validate( toValidate[ property.name ] );
-
 
             if (!window.schemaRegistry[type]) {
                 console.warn(`Type ${type} is not registered in schema registry for property ${property.name} in schema ${schema["@id"]}`);
-            } else if( !window.schemaRegistry[type].validate( toValidate[ property.name ] ) ) {
+            } else if( !window.schemaRegistry[type].validator.apply( window.schemaRegistry[ type ], [ toValidate[ property.name ] ] ) ) {
                 console.warn(`Validation failed for property ${property.name} of type ${type} in schema ${schema["@id"]} (Value: ${toValidate[ property.name ]})`);
                 return false;
             }
@@ -71,6 +51,4 @@ export async function validator( toValidate ) {
     return true;
 }
 
-schema.validator = validator;
-window.schemaRegistry[schema["@id"]] = schema;
 
