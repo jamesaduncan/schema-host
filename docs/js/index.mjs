@@ -250,6 +250,7 @@ window.Microdata = Microdata;
 document.addEventListener('DOMContentLoaded', () => {
     const types = Array.from( document.querySelectorAll('[itemtype]') ).map( el => { return el.getAttribute('itemtype') } );
     window.schemaRegistry.add(...types)
+    document.microdata = microdata(document)
 });
 
 export { schemaRegistry };

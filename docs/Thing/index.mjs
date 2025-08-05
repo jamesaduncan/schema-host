@@ -1,0 +1,53 @@
+import schema from './schema.json' with { type: 'json' };
+import { microdata } from "/js/index.mjs";
+
+export async function validator( toValidate ) {
+    const THING = toValidate["@context"] + toValidate["@type"];
+    console.log(`Validating ${THING} against schema ${schema["@id"]}`);
+    
+    console.log( toValidate )
+
+
+    if ( toValidate instanceof Node ) { // if this is an HTML element, then we want to process it for microdata first.
+        toValidate = microdata( toValidate )[0];        
+    }
+    for ( const property of schema.property ) {
+        console.log(`in validation for property '${property.name} in schema ${THING}'`);
+        if ( property.cardinality == "1" || property.cardinality == "1..n" ) {
+            if (!toValidate[ property.name ]) {
+                console.warn(`Property '${property.name}' is missing in microdata ${schema["@id"]}`);
+                return false;
+            } else {
+                //console.log("Property " + property.name + " is present");
+            }
+        } else {
+            //console.log(`Property ${property.name} is optional in schema ${schema["@id"]}`);
+        }
+
+        if ( toValidate[ property.name ] ) {
+            const type = property.type;
+            console.log(`Need to validate type ${type}`);
+            if (!window.schemaRegistry[type]) {
+                console.log(`Don't have a ${type} in the schema registry, going to get it...`);
+                if ( window.schemaRegistry ) {
+                    console.log(`Schema registry is available, adding ${type} to it...`);
+                    await window.schemaRegistry.add( type );
+                } else {
+                    console.warn("Schema registry is not available, cannot validate type " + type);
+                    return false;
+                }
+            }
+
+            if (!window.schemaRegistry[type]) {
+                console.warn(`Type ${type} is not registered in schema registry for property ${property.name} in schema ${schema["@id"]}`);
+            } else if( !window.schemaRegistry[type].validator.apply( window.schemaRegistry[ type ], [ toValidate[ property.name ] ] ) ) {
+                console.warn(`Validation failed for property ${property.name} of type ${type} in schema ${schema["@id"]} (Value: ${toValidate[ property.name ]})`);
+                return false;
+            }
+        }
+    }
+    console.log(`Schema ${schema["@id"]} validation passed for ${JSON.stringify(toValidate, null, 2)}`);
+    return true;
+}
+
+

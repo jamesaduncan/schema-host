@@ -72,7 +72,7 @@ permalink: "/{{ datatype.name }}/"
                 import { validator }from "{{ validatorURL}}";
 
                 const input =document.querySelector('input');
-                const microdata = window.Microdata( document )[0]
+                const microdata = window.Microdata( document )
 
                 input.addEventListener( "input", () => {
                     span.toggleAttribute('hidden', true);
@@ -98,9 +98,8 @@ permalink: "/{{ datatype.name }}/"
 
         </main>
         
-        <footer>
-            <p>&copy; 2025 Schema Host</p>
-        </footer>
+        {% render "footer.liquid" with datatype as object %}
+
     </body>
 
 </html>

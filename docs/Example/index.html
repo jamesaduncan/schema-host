@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SchemaHost - </title>
+        <link rel="stylesheet" href="/styles.css">
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+        <script type="module" src="/js/index.mjs"></script>
+        <style>
+            html {
+                --background-color: #fff;
+                --text-color: #333;
+                --link-color: #007bff;
+                --link-hover-color: #0056b3;
+
+                --highlight-color: yellow;
+                --highlight-border: 1px solid red;
+            }
+
+
+            body {
+                background-color: var(--background-color);
+            }
+
+            [itemprop] {
+                border: 1px solid var(--background-color);
+            }
+
+            .highlight [itemprop] {
+                background-color: var(--highlight-color);
+                border: var(--highlight-border);
+            }
+
+            .actions textarea {
+                border-radius: 5px;
+                outline: none;
+                padding: 1em;
+                font-family: Monaco, monospace;
+
+                height: 200px;
+                width: 80%;
+                font-size: .8em;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Schema Host - Example</h1>
+        </header>
+        <main id="example" itemscope itemtype="https://schema.host/Thing">
+
+            <section>
+                <h2><span itemprop="name">Example</span> Use of Schema</h2>
+                <p itemprop="description">
+                    HTML Microdata can be used to mark up all sorts of things.
+                </p>
+            </section>
+
+            <section class="actions">
+                <h2>Actions</h2>
+                <p>
+                    Properties of the schema can be highlighted.
+                    <button id="highlight">Highlight</button>
+                </p>
+                
+                <p>
+                    Items that declare themselves to be of a type with the <code>itemtype</code> attribute can
+                    be validated.
+                    <button id="validate">Validate</button>
+                </p>
+
+                <p>
+                    Items can be extracted from pages.
+                    <button id="extract">Extract</button>
+                </p>
+                <textarea id="extract"placeholder="Extracted items will appear here..."></textarea>
+            </section>
+        </main>
+
+        <script type="module">
+            document.querySelector('button#highlight').addEventListener('click', () => {
+                document.body.classList.toggle('highlight')
+            });
+
+            document.querySelector('button#extract').addEventListener('click', () => {
+                const items = document.microdata;
+                document.querySelector('textarea#extract').value = JSON.stringify(items,null,2);
+            });
+
+            document.querySelector('button#validate').addEventListener('click', async () => {
+                const items = document.microdata;
+                window.schemaRegistry.validate( document.microdata[0] )
+                console.log(results);
+            });
+        </script>    
+
+        <footer>
+    <p>&copy; 2025 Schema Host</p>
+</footer>
+
+    </body>
+</html>
