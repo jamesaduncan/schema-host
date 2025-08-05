@@ -210,7 +210,6 @@ if (!window.schemaRegistry) {
                         const src = md.validator;
                         const { validator } = await import( src );
                         md.validator = validator;
-                        console.log(`Imported validator for ${url} from ${src}`);
                     } else {
                         md.validator = () => { return true; }; // Default validator if none is provided
                     }
@@ -264,7 +263,6 @@ const schemaRegistry = window.schemaRegistry;
 
 document.addEventListener('DOMContentLoaded', () => {
     const types = Array.from( document.querySelectorAll('[itemtype]') ).map( el => { return el.getAttribute('itemtype') } );
-    console.log( `adding types to schema registry:`, types );
     const knownSchema = [
         "https://schema.host/Schema",
         "https://schema.host/Property",        
