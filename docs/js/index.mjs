@@ -188,67 +188,73 @@ export function microdata( doc, options ) {
 };
 
 
-window.schemaRegistry = {
-    'registryData': {},
-    'add': async function( ...urls ) {
-        for ( const url of urls ) {
-            const response = await fetch( url );
-            if ( response.ok ) {
-                const data = await response.text();
-                const doc = new DOMParser().parseFromString(data, 'text/html');
-                const md  = microdata( doc )[0];
-                window.schemaRegistry.registryData[ url ] = md;
-                if ( md.validator ) {
-                    console.log(`Importing validator for ${url} from ${md.validator}`);
-                    const { validator } = await import( md.validator );
-                    md.validator = validator;
-                } else {
-                    md.validator = () => { return true; }; // Default validator if none is provided
+if (!window.schemaRegistry) {
+    window.schemaRegistry = {
+        'registryData': {},
+        'add': async function( ...urls ) {
+            for ( const url of urls ) {
+                const response = await fetch( url );
+                if ( response.ok ) {
+                    const data = await response.text();
+                    const doc = new DOMParser().parseFromString(data, 'text/html');
+                    const md  = microdata( doc )[0];
+                    if ( md.validator ) {
+                        console.log(`Importing validator for ${url} from ${md.validator}`);
+                        const { validator } = await import( md.validator );
+                        md.validator = validator;
+                    } else {
+                        md.validator = () => { return true; }; // Default validator if none is provided
+                    }
+                    window.schemaRegistry.registryData[ url ] = md;
                 }
             }
-        }
-    },
-    'validate': async function( data ) {
-        if ( !data || typeof data !== 'object' ) {
-            throw new Error('Invalid data provided for validation');
-        }
-        const type = data['@context'] + data['@type'] 
-        if ( !type ) {
-            throw new Error('Data must have a type to validate against schema');
-        }
-        const schema = this.registryData[type];
-        if ( !schema ) {
-            throw new Error(`No schema found for type: ${type}`);
-        }
-        if ( typeof schema.validator === 'function' ) {
-            console.log(`about to validate top level object ${type}`)
-            try {
-                return await schema.validator(data);
-            } catch(e) {
-                throw new Error(`Validation failed for ${type}: ${e.message}`);
+        },
+        'validate': async function( data ) {
+            if ( !data || typeof data !== 'object' ) {
+                throw new Error('Invalid data provided for validation');
             }
-        } else {
-            return true; // If no validator function, assume valid
+            const type = data['@context'] + data['@type'] 
+            if ( !type ) {
+                throw new Error('Data must have a type to validate against schema');
+            }
+
+            const schema = this.registryData[type];
+            if ( !schema ) {
+                await this.add( type );
+            }
+
+            if ( typeof schema.validator === 'function' ) {
+                console.log(`about to validate top level object ${type}`)
+                try {
+                    return await schema.validator(data);
+                } catch(e) {
+                    throw new Error(`Validation failed for ${type}: ${e.message}`);
+                }
+            } else {
+                return true; // If no validator function, assume valid
+            }
+        }
+    };
+
+    class Microdata {
+        constructor( elem ) {
+            Object.assign( this, microdata( elem )[0] )
+        }
+    
+        async validate() {
+            window.schemaRegistry.validate( this );
         }
     }
-};
+    
+    window.Microdata = Microdata;    
+}
+
 
 const schemaRegistry = window.schemaRegistry;
 
-class Microdata {
-    constructor( elem ) {
-        Object.assign( this, microdata( elem )[0] )
-    }
-
-    async validate() {
-        window.schemaRegistry.validate( this );
-    }
-}
-
-window.Microdata = Microdata;
-
 document.addEventListener('DOMContentLoaded', () => {
     const types = Array.from( document.querySelectorAll('[itemtype]') ).map( el => { return el.getAttribute('itemtype') } );
+    console.log( `adding types to schema registry:`, types );
     window.schemaRegistry.add(...types)
     document.microdata = microdata(document)
 });

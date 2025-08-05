@@ -90,7 +90,7 @@
 
             document.querySelector('button#validate').addEventListener('click', async () => {
                 const items = document.microdata;
-                window.schemaRegistry.validate( document.microdata[0] )
+                const results = await window.schemaRegistry.validate( document.microdata[0] )
                 console.log(results);
             });
         </script>    
