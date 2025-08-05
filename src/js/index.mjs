@@ -121,7 +121,6 @@ function extractProperty( doc, item ) {
                 return item.querySelector('[selected]').innerText.trim() || '';
             case 'base':
                 const attr = item.getAttribute('href').trim() || '';
-                console.log("Base tag found, extracting href!", item, attr);
                 return attr;
             default:
                 return item.innerText.trim();
@@ -191,6 +190,11 @@ export function microdata( doc, options ) {
 if (!window.schemaRegistry) {
     window.schemaRegistry = {
         'registryData': {},
+
+        'has': function( url ) {
+            return this.registryData.hasOwnProperty(url);
+        },
+
         'add': async function( ...urls ) {
             for ( const url of urls ) {
                 const response = await fetch( url );
@@ -199,13 +203,16 @@ if (!window.schemaRegistry) {
                     const doc = new DOMParser().parseFromString(data, 'text/html');
                     const md  = microdata( doc )[0];
                     if ( md.validator ) {
-                        console.log(`Importing validator for ${url} from ${md.validator}`);
-                        const { validator } = await import( md.validator );
+                        const src = md.validator;
+                        const { validator } = await import( src );
                         md.validator = validator;
+                        console.log(`Imported validator for ${url} from ${src}`);
                     } else {
                         md.validator = () => { return true; }; // Default validator if none is provided
                     }
                     window.schemaRegistry.registryData[ url ] = md;
+                } else {
+                    console.error(`Failed to fetch schema from ${url}:`, response.statusText);
                 }
             }
         },
@@ -224,7 +231,6 @@ if (!window.schemaRegistry) {
             }
 
             if ( typeof schema.validator === 'function' ) {
-                console.log(`about to validate top level object ${type}`)
                 try {
                     return await schema.validator(data);
                 } catch(e) {
@@ -255,10 +261,22 @@ const schemaRegistry = window.schemaRegistry;
 document.addEventListener('DOMContentLoaded', () => {
     const types = Array.from( document.querySelectorAll('[itemtype]') ).map( el => { return el.getAttribute('itemtype') } );
     console.log( `adding types to schema registry:`, types );
+    const knownSchema = [
+        "https://schema.host/Schema",
+        "https://schema.host/Property",        
+        "https://schema.host/Thing",
+        "https://schema.host/Text",
+        "https://schema.host/Number",
+        "https://schema.host/DateTime",
+        "https://schema.host/URL",
+        "https://schema.host/Date",
+        "https://schema.host/Boolean",
+        "https://schema.host/Cardinal",
+    ]
+    window.schemaRegistry.add(...knownSchema);
     window.schemaRegistry.add(...types)
     document.microdata = microdata(document)
 });
 
 export { schemaRegistry };
-
 
