@@ -37,7 +37,7 @@ export async function validator( toValidate ) {
 
             if (!window.schemaRegistry.has( type )) {
                 console.warn(`Type ${type} is not registered in schema registry for property ${property.name} in schema ${schema["@id"]}`);
-            } else if( !window.schemaRegistry[type].validator.apply( window.schemaRegistry.get( type ), [ toValidate[ property.name ] ] ) ) {
+            } else if( !window.schemaRegistry.get( type ).validator.apply( window.schemaRegistry.get( type ), [ toValidate[ property.name ] ] ) ) {
                 console.warn(`Validation failed for property ${property.name} of type ${type} in schema ${schema["@id"]} (Value: ${toValidate[ property.name ]})`);
                 return false;
             }
