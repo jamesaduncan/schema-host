@@ -192,7 +192,11 @@ if (!window.schemaRegistry) {
         'registryData': {},
 
         'has': function( url ) {
-            return this.registryData.hasOwnProperty(url);
+            return !!this.registryData.hasOwnProperty(url);
+        },
+
+        'get': function( url ) {
+            return this.registryData[url] || null;
         },
 
         'add': async function( ...urls ) {

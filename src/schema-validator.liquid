@@ -34,20 +34,17 @@ export async function validator( toValidate ) {
         if ( toValidate[ property.name ] ) {
             const type = property.type;
             //console.log(`Need to validate type ${type}`);
-            if (!window.schemaRegistry[type]) {
-                //console.log(`Don't have a ${type} in the schema registry, going to get it...`);
+            if (!window.schemaRegistry.has( type )) {
                 if ( window.schemaRegistry ) {
                     await window.schemaRegistry.add( type );
-                    //console.log(`Added ${type} to schema registry.`);
                 } else {
-                    //console.warn("Schema registry is not available, cannot validate type " + type);
                     return false;
                 }
             }
 
             if (!window.schemaRegistry.has( type )) {
                 console.warn(`Type ${type} is not registered in schema registry for property ${property.name} in schema ${schema["@id"]}`);
-            } else if( !window.schemaRegistry[type].validator.apply( window.schemaRegistry[ type ], [ toValidate[ property.name ] ] ) ) {
+            } else if( !window.schemaRegistry[type].validator.apply( window.schemaRegistry.get( type ), [ toValidate[ property.name ] ] ) ) {
                 console.warn(`Validation failed for property ${property.name} of type ${type} in schema ${schema["@id"]} (Value: ${toValidate[ property.name ]})`);
                 return false;
             }
