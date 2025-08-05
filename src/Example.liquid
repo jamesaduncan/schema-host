@@ -18,7 +18,6 @@
                 --highlight-border: 1px solid red;
             }
 
-
             body {
                 background-color: var(--background-color);
             }
@@ -41,6 +40,14 @@
                 height: 200px;
                 width: 80%;
                 font-size: .8em;
+            }
+
+            .valid {
+                background-color: green;
+            }
+
+            .invalid {
+                background-color: red;
             }
         </style>
     </head>
@@ -88,10 +95,15 @@
                 document.querySelector('textarea#extract').value = JSON.stringify(items,null,2);
             });
 
-            document.querySelector('button#validate').addEventListener('click', async () => {
+            document.querySelector('button#validate').addEventListener('click', async (e) => {
                 const items = document.microdata;
-                const results = await window.schemaRegistry.validate( document.microdata[0] )
-                console.log(results);
+                if ( await window.schemaRegistry.validate( document.microdata[0] ) ) {
+                    e.target.classList.add('valid');
+                    e.target.classList.remove('invalid');
+                } else {
+                    e.target.classList.add('invalid');
+                    e.target.classList.remove('valid');
+                }
             });
         </script>    
 
