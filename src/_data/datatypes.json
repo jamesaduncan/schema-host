@@ -40,6 +40,22 @@
     {
         "@type": "DataType",
         "@context":"https://schema.host/",
+        "@id": "https://schema.host/Integer",
+        "name": "Integer",
+        "parent": "https://schema.host/DataType",
+        "description": "Validates that something is an Integer."
+    },    
+    {
+        "@type": "DataType",
+        "@context":"https://schema.host/",
+        "@id": "https://schema.host/FloatingPoint",
+        "name": "FloatingPoint",
+        "parent": "https://schema.host/DataType",
+        "description": "Validates that something is a floating point number."
+    },    
+    {
+        "@type": "DataType",
+        "@context":"https://schema.host/",
         "@id": "https://schema.host/Boolean",
         "name": "Boolean",
         "description": "True, or false",

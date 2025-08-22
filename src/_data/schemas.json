@@ -153,5 +153,41 @@
                 "type": "https://schema.host/Text"
             }
         ]
-    }
+    },
+    {
+        "@type": "Schema",
+        "@context":"https://schema.host/",
+        "@id": "https://schema.host/FixedValue",
+        "name": "FixedValue",
+        "parent": "https://schema.host/Schema",
+        "description": "Validates that something is a particular value without",
+        "property": [
+            {
+                "@type": "Property",
+                "@context": "https://schema.host/",
+                "name": "value",
+                "description": "The value that will be tested",
+                "cardinality": "1",
+                "type": "https://schema.host/Text"
+            }            
+        ]
+    },    
+    {
+        "@type": "Schema",
+        "@context":"https://schema.host/",
+        "@id": "https://schema.host/CaseInsensitiveValue",
+        "name": "CaseInsensitiveValue",
+        "parent": "https://schema.host/Schema",
+        "description": "Validates that something is a particular value (without case sensitivity)",
+        "property": [
+            {
+                "@type": "Property",
+                "@context": "https://schema.host/",
+                "name": "value",
+                "description": "The value that will be tested",
+                "cardinality": "1",
+                "type": "https://schema.host/Text"
+            }            
+        ]
+    } 
 ]
