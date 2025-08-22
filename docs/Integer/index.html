@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SchemaHost - Integer</title>
+        <link rel="stylesheet" href="/styles.css">
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+        <script type="module" src="/js/index.mjs"></script>
+    </head>
+
+    <body itemid="" itemscope itemtype="https://schema.host/DataType">
+                <header>
+            <h1>Schema Host</span> - <span itemprop="name">Integer</span></h1>
+            <h2>Validatable HTML microdata schemas</h2>
+        </header>
+
+        <nav>
+            <menu itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a href="/">Home</a>
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a href="/DataTypes">DataTypes</a>
+                </li>                
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a id="a" itemprop="Integer" href="https://schema.host/Integer">Integer</a>
+                </li>
+            </menu>
+        </nav>
+
+        <main>
+            <base itemprop="url" href="https://schema.host/Integer">
+
+            
+            <p itemprop="description">Validates that something is an Integer.</p>
+
+            
+            <p>Inherits from <a href="/DataType">DataType</a></p>
+            
+
+
+            
+            
+            </ul>
+
+            <h2>Validation Test</h2>
+
+            <p>The validator for this datatype can be found at: <a itemprop="validator" href="/Integer/index.mjs">https://schema.host/Integer/index.mjs</a></p>
+
+            <form>
+                Test validator: <input id="toValidate" type="text"> <button>Valid?</button> <span class="valid">&#x2611;</span>
+            </form>
+
+            <script type="module">
+                import { validator }from "/Integer/index.mjs";
+
+                const input =document.querySelector('input');
+                const microdata = window.Microdata( document )
+
+                input.addEventListener( "input", () => {
+                    span.toggleAttribute('hidden', true);
+                    const result = validator.apply(microdata, [ input.value ] );
+                    if ( result ) {
+                        input.setCustomValidity( "" );
+                    } else {
+                        input.setCustomValidity( "Does not pass validation" );
+                    }
+                });
+                const span = document.querySelector('.valid');
+                span.toggleAttribute('hidden', true);
+                const form = document.querySelector( 'form' );
+                form.addEventListener('submit', (e) => {
+                    if ( form.checkValidity() ) {
+                        span.toggleAttribute('hidden', false);
+                    } else {
+                        span.toggleAttribute('hidden', true);
+                    }
+                    e.preventDefault();
+                });
+            </script>
+
+        </main>
+        
+        <footer>
+    <p>&copy; 2025 Schema Host</p>
+</footer>
+
+
+    </body>
+
+</html>

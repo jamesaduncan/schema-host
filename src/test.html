@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SchemaHost - DataType</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&amp;display=swap" rel="stylesheet">
+    <script type="module" src="/js/index.mjs"></script>
+<body itemid="https://schema.host/DataType" itemscope="" itemtype="https://schema.host/Schema">
+            <header>
+        <h1>Schema Host - DataType</h1>
+        <h2>Validatable HTML microdata schemas</h2>
+    </header>
+
+    <nav>
+        <menu itemscope="" itemtype="https://schema.org/BreadcrumbList">
+            <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+                <a href="/">Home</a>
+            </li>
+            <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+                <a href="/Schemas">Schemas</a>
+            </li>                
+            <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+                <a id="a" itemprop="DataType" href="https://schema.host/DataType">DataType</a>
+            </li>
+        </menu>
+    </nav>
+
+    <main>
+        <p itemprop="description">generic microdata schema for any datatype</p>
+
+        
+        <p>Inherits from <a href="/Schema">Schema</a></p>
+        
+
+        <table>
+            <caption>Properties of the DataType schema</caption>
+            <thead>
+                <tr>
+                    <th>Property Name</th>
+                    <th>Type</th>
+                    <th>Cardinality</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr itemprop="property" itemscope="" itemtype="https://schema.host/Property">
+                    <td itemprop="name">url</td>
+                    <td itemprop="type"><a href="/URL">URL</a></td>
+                    <td itemprop="cardinality">1</td>
+                    <td itemprop="description">The type of the datatype</td>
+                </tr>
+                
+                <tr itemprop="property" itemscope="" itemtype="https://schema.host/Property">
+                    <td itemprop="name">description</td>
+                    <td itemprop="type"><a href="/Text">Text</a></td>
+                    <td itemprop="cardinality">1</td>
+                    <td itemprop="description">A description of the DataType.</td>
+                </tr>
+                
+            </tbody>
+        </table>
+
+        <script itemprop="raw" type="application/json" itemscope itemtype="https://schema.host/JSON">
+            [
+            { "one": "two" }
+            ]
+        </script>
+    
+    </main>
+    
+    <footer>
+        <p>© 2025 Schema Host</p>
+    </footer>
+
+
+
+
+</body></html>

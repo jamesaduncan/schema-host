@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SchemaHost - CaseInsensitiveValue</title>
+        <link rel="stylesheet" href="/styles.css">
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+        <script type="module" src="/js/index.mjs"></script>
+        <script type="module" src="./index.mjs"></script>
+    </head>
+
+    <body itemid="https://schema.host/CaseInsensitiveValue" itemscope itemtype="https://schema.host/Schema">
+                <header>
+            <h1>Schema Host</span> - <span itemprop="name">CaseInsensitiveValue</span></h1>
+            <h2>Validatable HTML microdata schemas</h2>
+        </header>
+
+        <nav>
+            <menu itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a href="/">Home</a>
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a href="/Schemas">Schemas</a>
+                </li>                
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a id="a" itemprop="CaseInsensitiveValue" href="https://schema.host/CaseInsensitiveValue">CaseInsensitiveValue</a>
+                </li>
+            </menu>
+        </nav>
+
+        <main>
+            <p itemprop="description">Validates that something is a particular value (without case sensitivity)</p>
+
+            <p>
+                The schema can be validated with the JavaScript module at <a itemprop="validator" href="./index.mjs">https://schema.host/CaseInsensitiveValue/index.mjs</a>.
+
+                <code>
+<pre>
+    import { validator } from 'https://schema.host/CaseInsensitiveValue/index.mjs';
+    if ( await validator( anElement ) ) {
+        console.log('Element is valid according to the CaseInsensitiveValue schema.');
+    } else {
+        console.error('Element is invalid according to the CaseInsensitiveValue schema.');
+    }
+</pre>
+                </code>
+            </p>
+
+            
+            <p>Inherits from <a href="/Schema">Schema</a></p>
+            
+
+            <table>
+                <caption>Properties of the CaseInsensitiveValue schema</caption>
+                <thead>
+                    <tr>
+                        <th>Property Name</th>
+                        <th>Type</th>
+                        <th>Cardinality</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr itemprop="property" itemscope itemtype="https://schema.host/Property">
+                        <td itemprop="name">value</td>
+                        <td itemprop="type"><a href="/Text">Text</a></td>
+                        <td itemprop="cardinality">1</td>
+                        <td itemprop="description">The value that will be tested</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+
+        
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 Schema Host</p>
+        </footer>
+
+    </body>
+
+</html>

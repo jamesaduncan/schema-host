@@ -1,0 +1,41 @@
+import schema from './schema.json' with { type: 'json' };
+import { microdata } from "/js/index.mjs";
+
+export async function validator( toValidate ) {
+    const aThing = toValidate["@context"] + toValidate["@type"];
+
+    if ( toValidate instanceof Node ) { // if this is an HTML element, then we want to process it for microdata first.
+        toValidate = microdata( toValidate )[0];        
+    }
+    
+    for ( const property of schema.property ) {
+        if ( property.cardinality == "1" || property.cardinality == "1..n" ) {
+            if (!toValidate[ property.name ]) {
+                return false;
+            }
+        } 
+
+        if ( toValidate[ property.name ] ) {
+            const type = property.type;
+            if (!window.schemaRegistry.has( type )) {
+                if ( window.schemaRegistry ) {
+                    await window.schemaRegistry.add( type );
+                } else {
+                    return false;
+                }
+            }
+
+            if (!window.schemaRegistry.has( type )) {
+                console.warn(`Type ${type} is not registered in schema registry for property ${property.name} in schema ${schema["@id"]}`);
+                return false;
+            } else if( !window.schemaRegistry.get( type ).validator.apply( window.schemaRegistry.get( type ), [ toValidate[ property.name ] ] ) ) {
+                console.warn(`Validation failed for property ${property.name} of type ${type} in schema ${schema["@id"]} (Value: ${toValidate[ property.name ]})`);
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+
