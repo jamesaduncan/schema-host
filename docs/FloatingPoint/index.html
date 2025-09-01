@@ -43,43 +43,6 @@
             
             
             </ul>
-
-            <h2>Validation Test</h2>
-
-            <p>The validator for this datatype can be found at: <a itemprop="validator" href="/FloatingPoint/index.mjs">https://schema.host/FloatingPoint/index.mjs</a></p>
-
-            <form>
-                Test validator: <input id="toValidate" type="text"> <button>Valid?</button> <span class="valid">&#x2611;</span>
-            </form>
-
-            <script type="module">
-                import { validator }from "/FloatingPoint/index.mjs";
-
-                const input =document.querySelector('input');
-                const microdata = window.Microdata( document )
-
-                input.addEventListener( "input", () => {
-                    span.toggleAttribute('hidden', true);
-                    const result = validator.apply(microdata, [ input.value ] );
-                    if ( result ) {
-                        input.setCustomValidity( "" );
-                    } else {
-                        input.setCustomValidity( "Does not pass validation" );
-                    }
-                });
-                const span = document.querySelector('.valid');
-                span.toggleAttribute('hidden', true);
-                const form = document.querySelector( 'form' );
-                form.addEventListener('submit', (e) => {
-                    if ( form.checkValidity() ) {
-                        span.toggleAttribute('hidden', false);
-                    } else {
-                        span.toggleAttribute('hidden', true);
-                    }
-                    e.preventDefault();
-                });
-            </script>
-
         </main>
         
         <footer>
