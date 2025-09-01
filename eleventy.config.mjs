@@ -3,6 +3,7 @@ export default async function(eleventyConfig) {
     eleventyConfig.addPassthroughCopy("src/js/*");
     eleventyConfig.addPassthroughCopy("src/Validators/*.mjs");
     eleventyConfig.addPassthroughCopy("src/*/*.mjs")
+    eleventyConfig.addPassthroughCopy("src/*/*.wasm")
     eleventyConfig.addPassthroughCopy("src/CNAME");
 
     console.log(`Adding a filter for sorting`);

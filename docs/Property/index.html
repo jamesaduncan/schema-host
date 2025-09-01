@@ -33,21 +33,6 @@
         <main>
             <p itemprop="description">Microdata that describes a property in a schema.</p>
 
-            <p>
-                The schema can be validated with the JavaScript module at <a itemprop="validator" href="./index.mjs">https://schema.host/Property/index.mjs</a>.
-
-                <code>
-<pre>
-    import { validator } from 'https://schema.host/Property/index.mjs';
-    if ( await validator( anElement ) ) {
-        console.log('Element is valid according to the Property schema.');
-    } else {
-        console.error('Element is invalid according to the Property schema.');
-    }
-</pre>
-                </code>
-            </p>
-
             
             <p>Inherits from <a href="/Schema">Schema</a></p>
             
@@ -72,6 +57,13 @@
                     </tr>
                     
                     <tr itemprop="property" itemscope itemtype="https://schema.host/Property">
+                        <td itemprop="name">type</td>
+                        <td itemprop="type"><a href="/Text">Text</a></td>
+                        <td itemprop="cardinality">1..n</td>
+                        <td itemprop="description">The type the of the property</td>
+                    </tr>
+                    
+                    <tr itemprop="property" itemscope itemtype="https://schema.host/Property">
                         <td itemprop="name">cardinality</td>
                         <td itemprop="type"><a href="/Cardinal">Cardinal</a></td>
                         <td itemprop="cardinality">1</td>
@@ -92,8 +84,9 @@
         </main>
         
         <footer>
-            <p>&copy; 2025 Schema Host</p>
-        </footer>
+    <p>&copy; 2025 Schema Host</p>
+</footer>
+
 
     </body>
 

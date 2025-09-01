@@ -19,6 +19,14 @@
             {
                 "@type": "Property",
                 "@context": "https://schema.host/",
+                "name": "type",
+                "description": "The type the of the property",
+                "cardinality": "1..n",
+                "type": "https://schema.host/Text"
+            },
+            {
+                "@type": "Property",
+                "@context": "https://schema.host/",
                 "name": "cardinality",
                 "description": "The cardinality of the property",
                 "cardinality": "1",

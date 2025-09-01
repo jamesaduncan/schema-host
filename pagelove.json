@@ -1,0 +1,14 @@
+{
+  "name": "schema-host",
+  "version": "1.0.0",
+  "entry": "index.html",
+  "port": 3000,
+  "build": {
+    "outputDir": "docs",
+    "publicPath": "/"
+  },
+  "routes": [],
+  "selectors": {},
+  "middleware": [],
+  "environment": {}
+}
