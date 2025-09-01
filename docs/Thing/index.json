@@ -9,14 +9,6 @@
     {
       "@type": "Property",
       "@context": "https://schema.host/",
-      "name": "@id",
-      "description": "The fully qualified URL to this schema. Note, this property is special, and in HTML can be derived from the baseURI of an element + the element's id attribute.",
-      "cardinality": "1",
-      "type": "https://schema.host/URL"
-    },
-    {
-      "@type": "Property",
-      "@context": "https://schema.host/",
       "name": "name",
       "description": "The name of the thing.",
       "cardinality": "1",

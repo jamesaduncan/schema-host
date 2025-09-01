@@ -20,7 +20,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "run": "npx @11ty/eleventy --input=src --output=docs --config=./eleventy.config.mjs",
+    "build": "npx @11ty/eleventy --input=src --output=docs --config=./eleventy.config.mjs",
     "test": "npx @11ty/eleventy --input=src --output=docs --config=./eleventy.config.mjs && npx cspell --no-progress --no-summary --show-suggestions docs",
     "dev": "npx @11ty/eleventy --input=src --output=docs --config=./eleventy.config.mjs --serve --watch"
   },
