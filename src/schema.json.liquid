@@ -1,0 +1,8 @@
+---
+pagination:
+    data: schemas
+    size: 1
+    alias: schema
+permalink: "/{{ schema.name }}/index.json"
+---
+{{ schema | json: 2 }}
