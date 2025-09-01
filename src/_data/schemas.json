@@ -1,7 +1,7 @@
 [
     {
         "@type": "Schema",
-        "@context": "https://schema.host/",
+        "@context": "https://schema.host/Schema",
         "@id": "https://schema.host/Property",
         "name": "Property",
         "description": "Microdata that describes a property in a schema.",
@@ -44,7 +44,7 @@
     },
     {
         "@type": "Schema",
-        "@context": "https://schema.host/",
+        "@context": "https://schema.host/Schema",
         "@id": "https://schema.host/Schema",        
         "name": "Schema",
         "description": "Schema.host Microdata Schema",
