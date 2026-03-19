@@ -39,7 +39,34 @@
                 "description": "A description of the property",
                 "cardinality": "1",
                 "type": "https://schema.host/Text"
-            }
+            },
+            {
+                "@type": "Property",
+                "@context":"https://schema.host/",
+                "name": "default",
+                "description": "A default value for the property. It can either be a plan text value, or a Sessel expression",
+                "cardinality": "0..1",
+                "type": [
+                    "https://schema.host/Text",
+                    "https://pagelove.org/Sessel"
+                ]
+            },
+            {
+                "@type": "Property",
+                "@context":"https://schema.host/",
+                "name": "unique",
+                "description": "Is this value unique across all items of this type? Used to indicate to validators that no other item of this type should have the same value for this property.",
+                "cardinality": "0..1",
+                "type": "https://schema.host/Boolean"
+            },
+            {
+                "@type": "Property",
+                "@context":"https://schema.host/",
+                "name": "references",
+                "description": "The references indicates there is a relationship between this property and another schema. This is used to indicate to validators that the value of this property should exist as a property of the referenced type",
+                "cardinality": "0..1",
+                "type": "https://schema.host/URL"
+            }            
         ]
     },
     {

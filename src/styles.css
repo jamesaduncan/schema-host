@@ -93,6 +93,20 @@ main {
 
     td {
         padding: 0.5em;
+
+        ul {
+            padding-left: 0;
+
+            li {
+                display: inline-block;
+                list-style-type: none;
+                padding-left: 0;
+            }
+
+            li:not(:last-child):after {
+                content: ", ";
+            }
+        }
     }
 
     td:nth-child(3) {

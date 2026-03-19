@@ -51,30 +51,73 @@
                     
                     <tr itemprop="property" itemscope itemtype="https://schema.host/Property">
                         <td itemprop="name">name</td>
+                        
                         <td itemprop="type"><a href="/Text">Text</a></td>
+                        
                         <td itemprop="cardinality">1</td>
                         <td itemprop="description">A name for the property</td>
                     </tr>
                     
                     <tr itemprop="property" itemscope itemtype="https://schema.host/Property">
                         <td itemprop="name">type</td>
+                        
                         <td itemprop="type"><a href="/Text">Text</a></td>
+                        
                         <td itemprop="cardinality">1..n</td>
                         <td itemprop="description">The type the of the property</td>
                     </tr>
                     
                     <tr itemprop="property" itemscope itemtype="https://schema.host/Property">
                         <td itemprop="name">cardinality</td>
+                        
                         <td itemprop="type"><a href="/Cardinal">Cardinal</a></td>
+                        
                         <td itemprop="cardinality">1</td>
                         <td itemprop="description">The cardinality of the property</td>
                     </tr>
                     
                     <tr itemprop="property" itemscope itemtype="https://schema.host/Property">
                         <td itemprop="name">description</td>
+                        
                         <td itemprop="type"><a href="/Text">Text</a></td>
+                        
                         <td itemprop="cardinality">1</td>
                         <td itemprop="description">A description of the property</td>
+                    </tr>
+                    
+                    <tr itemprop="property" itemscope itemtype="https://schema.host/Property">
+                        <td itemprop="name">default</td>
+                        
+                        <td>
+                            <ul>
+                            
+                                <li><a href="https://schema.host/Text">Text</a></li>
+                            
+                                <li><a href="https://pagelove.org/Sessel">Sessel</a></li>
+                            
+                            </ul>
+                        </td>
+                        
+                        <td itemprop="cardinality">0..1</td>
+                        <td itemprop="description">A default value for the property. It can either be a plan text value, or a Sessel expression</td>
+                    </tr>
+                    
+                    <tr itemprop="property" itemscope itemtype="https://schema.host/Property">
+                        <td itemprop="name">unique</td>
+                        
+                        <td itemprop="type"><a href="/Boolean">Boolean</a></td>
+                        
+                        <td itemprop="cardinality">0..1</td>
+                        <td itemprop="description">Is this value unique across all items of this type? Used to indicate to validators that no other item of this type should have the same value for this property.</td>
+                    </tr>
+                    
+                    <tr itemprop="property" itemscope itemtype="https://schema.host/Property">
+                        <td itemprop="name">references</td>
+                        
+                        <td itemprop="type"><a href="/URL">URL</a></td>
+                        
+                        <td itemprop="cardinality">0..1</td>
+                        <td itemprop="description">The references indicates there is a relationship between this property and another schema. This is used to indicate to validators that the value of this property should exist as a property of the referenced type</td>
                     </tr>
                     
                 </tbody>

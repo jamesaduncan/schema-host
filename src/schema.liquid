@@ -55,7 +55,17 @@ permalink: "/{{ schema.name }}/"
                     {% for property in schema.property %}
                     <tr itemprop="property" itemscope itemtype="https://schema.host/Property">
                         <td itemprop="name">{{ property.name }}</td>
+                        {% if property.type.first %}
+                        <td>
+                            <ul>
+                            {% for prop in property.type %}
+                                <li><a href="{{ prop }}">{{ prop | split: '/' | last }}</a></li>
+                            {% endfor %}
+                            </ul>
+                        </td>
+                        {% else %}
                         <td itemprop="type"><a href="/{{ property['type'] | split: '/' | last }}">{{ property['type'] | split: '/' | last }}</a></td>
+                        {% endif %}
                         <td itemprop="cardinality">{{ property.cardinality }}</td>
                         <td itemprop="description">{{ property.description }}</td>
                     </tr>
