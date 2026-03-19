@@ -4,7 +4,6 @@
   "@id": "https://schema.host/Property",
   "name": "Property",
   "description": "Microdata that describes a property in a schema.",
-  "validator": "https://schema.host/Property/index.mjs",
   "parent": "https://schema.host/Schema",
   "property": [
     {

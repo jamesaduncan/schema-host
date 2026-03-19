@@ -3,8 +3,7 @@
   "@context": "https://schema.host/",
   "@id": "https://schema.host/DataType",
   "name": "DataType",
-  "description": "generic microdata schema for any datatype",
-  "validator": "https://schema.host/DataType/index.mjs",
+  "description": "generic microdata for any datatype",
   "parent": "https://schema.host/Schema",
   "property": [
     {

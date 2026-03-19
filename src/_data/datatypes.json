@@ -18,20 +18,6 @@
     {
         "@type": "DataType",
         "@context":"https://schema.host/",
-        "@id": "https://schema.host/Cardinal",
-        "name": "Cardinal",
-        "description": "An indicator of cardinality",
-        "parent": "https://schema.host/DataType",
-        "enumerator": [
-            "1",
-            "0..1",
-            "0..n",
-            "1..n"
-        ]
-    },
-    {
-        "@type": "DataType",
-        "@context":"https://schema.host/",
         "@id": "https://schema.host/Number",
         "name": "Number",
         "parent": "https://schema.host/DataType",
@@ -88,5 +74,13 @@
         "name": "JSON",
         "parent": "https://schema.host/DataType",
         "description": "JSON data"
+    },
+    {
+        "@type": "DataType",
+        "@context":"https://schema.host/",
+        "@id": "https://schema.host/Sessel",
+        "name": "Sessel",
+        "parent": "https://schema.host/DataType",
+        "description": "A Sessel expression"
     }
 ]

@@ -5,7 +5,6 @@
         "@id": "https://schema.host/Property",
         "name": "Property",
         "description": "Microdata that describes a property in a schema.",
-        "validator": "https://schema.host/Property/index.mjs",
         "parent": "https://schema.host/Schema",
         "property": [
             {
@@ -75,7 +74,6 @@
         "@id": "https://schema.host/Schema",        
         "name": "Schema",
         "description": "Schema.host Microdata Schema",
-        "validator": "https://schema.host/Schema/index.mjs",
         "property": [
             {
                 "@type": "Property",
@@ -85,14 +83,6 @@
                 "cardinality": "1",
                 "type": "https://schema.host/Text"
             },
-            {
-                "@type": "Property",
-                "@context": "https://schema.host/",
-                "name": "validator",
-                "description": "The URL to a  validator function",
-                "cardinality": "0..1",
-                "type": "https://schema.host/URL"
-            },            
             {
                 "@type": "Property",
                 "@context": "https://schema.host/",
@@ -117,8 +107,7 @@
         "@id": "https://schema.host/DataType",
 
         "name": "DataType",
-        "description": "generic microdata schema for any datatype",
-        "validator": "https://schema.host/DataType/index.mjs",
+        "description": "generic microdata for any datatype",
         "parent": "https://schema.host/Schema",
         "property": [
             {
@@ -138,67 +127,5 @@
                 "description": "A description of the DataType."
             }
         ]
-    },
-    {
-        "@type": "Schema",
-        "@context": "https://schema.host/",
-        "@id": "https://schema.host/Thing",
-        "name": "Thing",
-        "description": "A generic item",
-        "validator": "https://schema.host/Thing/index.mjs",
-        "property": [
-            {
-                "@type": "Property",
-                "@context": "https://schema.host/",
-                "name": "name",
-                "description": "The name of the thing.",
-                "cardinality": "1",
-                "type": "https://schema.host/Text"
-            },
-            {
-                "@type": "Property",
-                "@context": "https://schema.host/",
-                "name": "description",
-                "description": "A description of the thing.",
-                "cardinality": "0..1",
-                "type": "https://schema.host/Text"
-            }
-        ]
-    },
-    {
-        "@type": "Schema",
-        "@context":"https://schema.host/",
-        "@id": "https://schema.host/FixedValue",
-        "name": "FixedValue",
-        "parent": "https://schema.host/Schema",
-        "description": "Validates that something is a particular value without",
-        "property": [
-            {
-                "@type": "Property",
-                "@context": "https://schema.host/",
-                "name": "value",
-                "description": "The value that will be tested",
-                "cardinality": "1",
-                "type": "https://schema.host/Text"
-            }            
-        ]
-    },    
-    {
-        "@type": "Schema",
-        "@context":"https://schema.host/",
-        "@id": "https://schema.host/CaseInsensitiveValue",
-        "name": "CaseInsensitiveValue",
-        "parent": "https://schema.host/Schema",
-        "description": "Validates that something is a particular value (without case sensitivity)",
-        "property": [
-            {
-                "@type": "Property",
-                "@context": "https://schema.host/",
-                "name": "value",
-                "description": "The value that will be tested",
-                "cardinality": "1",
-                "type": "https://schema.host/Text"
-            }            
-        ]
-    } 
+    }
 ]
