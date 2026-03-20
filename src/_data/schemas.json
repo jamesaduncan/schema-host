@@ -1,4 +1,64 @@
 [
+        {
+        "@type": "Schema",
+        "@context": "https://schema.host/Schema",
+        "@id": "https://schema.host/Schema",        
+        "name": "Schema",
+        "description": "Schema.host Microdata Schema",
+        "property": [
+            {
+                "@type": "Property",
+                "@context": "https://schema.host/",
+                "name": "name",
+                "description": "The name of the schema.",
+                "cardinality": "1",
+                "type": "https://schema.host/Text"
+            },
+            {
+                "@type": "Property",
+                "@context": "https://schema.host/",
+                "name": "description",
+                "description": "the purpose of the schema",
+                "cardinality": "1",
+                "type": "https://schema.host/Text"
+            },
+            {
+                "@type": "Property",
+                "@context": "https://schema.host/",
+                "name": "property",
+                "description": "properties of a schema",
+                "cardinality": "0..n",
+                "type": "https://schema.host/Property"
+            }            
+        ]
+    },
+    {
+        "@type": "Schema",
+        "@context": "https://schema.host/",
+        "@id": "https://schema.host/DataType",
+
+        "name": "DataType",
+        "description": "generic microdata for any datatype",
+        "parent": "https://schema.host/Schema",
+        "property": [
+            {
+                "@type": "Property",
+                "@context": "https://schema.host/",
+                "name": "url",
+                "description": "The type of the datatype",
+                "cardinality": "1",
+                "type": "https://schema.host/URL"
+            },
+            {
+                "@type": "Property",
+                "@context": "https://schema.host/",
+                "name": "description",
+                "type": "https://schema.host/Text",
+                "cardinality": 1,
+                "description": "A description of the DataType."
+            }
+        ]
+    },
     {
         "@type": "Schema",
         "@context": "https://schema.host/Schema",
@@ -62,69 +122,17 @@
                 "@type": "Property",
                 "@context":"https://schema.host/",
                 "name": "references",
-                "description": "The references indicates there is a relationship between this property and another schema. This is used to indicate to validators that the value of this property should exist as a property of the referenced type",
+                "description": "The references property indicates there is a relationship between this property and another schema. This is used to indicate to validators that the value of this property should exist as a property of the referenced type. Formatted as the URL with the schema name and the url fragment set to the property being referenced",
                 "cardinality": "0..1",
                 "type": "https://schema.host/URL"
-            }            
-        ]
-    },
-    {
-        "@type": "Schema",
-        "@context": "https://schema.host/Schema",
-        "@id": "https://schema.host/Schema",        
-        "name": "Schema",
-        "description": "Schema.host Microdata Schema",
-        "property": [
+            },
             {
                 "@type": "Property",
                 "@context": "https://schema.host/",
-                "name": "name",
-                "description": "The name of the schema.",
-                "cardinality": "1",
+                "name": "cascade",
+                "description": "Indicates what should happen when a referenced document is deleted or its referenced value changes. Requires the references property to be set. When set to 'true', the cascade action is inferred from the cardinality of the property: required properties cause the referencing document to be deleted, optional properties are cleared. When set to restrict, deletion or modification of the referenced value is blocked if references exist.",
+                "cardinality": "0..1",
                 "type": "https://schema.host/Text"
-            },
-            {
-                "@type": "Property",
-                "@context": "https://schema.host/",
-                "name": "description",
-                "description": "the purpose of the schema",
-                "cardinality": "1",
-                "type": "https://schema.host/Text"
-            },
-            {
-                "@type": "Property",
-                "@context": "https://schema.host/",
-                "name": "property",
-                "description": "properties of a schema",
-                "cardinality": "0..n",
-                "type": "https://schema.host/Property"
-            }            
-        ]
-    },
-    {
-        "@type": "Schema",
-        "@context": "https://schema.host/",
-        "@id": "https://schema.host/DataType",
-
-        "name": "DataType",
-        "description": "generic microdata for any datatype",
-        "parent": "https://schema.host/Schema",
-        "property": [
-            {
-                "@type": "Property",
-                "@context": "https://schema.host/",
-                "name": "url",
-                "description": "The type of the datatype",
-                "cardinality": "1",
-                "type": "https://schema.host/URL"
-            },
-            {
-                "@type": "Property",
-                "@context": "https://schema.host/",
-                "name": "description",
-                "type": "https://schema.host/Text",
-                "cardinality": 1,
-                "description": "A description of the DataType."
             }
         ]
     }

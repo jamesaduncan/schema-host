@@ -78,7 +78,7 @@
     {
         "@type": "DataType",
         "@context":"https://schema.host/",
-        "@id": "https://schema.host/Sessel",
+        "@id": "https://pagelove.org/Sessel",
         "name": "Sessel",
         "parent": "https://schema.host/DataType",
         "description": "A Sessel expression"
