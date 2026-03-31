@@ -1,0 +1,18 @@
+{
+  "@type": "Schema",
+  "@context": "https://schema.host/",
+  "@id": "https://schema.host/Cardinal",
+  "name": "Cardinal",
+  "description": "The set of valid cardinality values for schema properties.",
+  "parent": "https://schema.host/Enum",
+  "property": [
+    {
+      "@type": "Property",
+      "@context": "https://schema.host/",
+      "name": "value",
+      "description": "A valid cardinality value.",
+      "cardinality": "1..n",
+      "type": "https://schema.host/Text"
+    }
+  ]
+}

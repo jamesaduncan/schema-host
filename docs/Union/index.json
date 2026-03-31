@@ -1,0 +1,18 @@
+{
+  "@type": "Schema",
+  "@context": "https://schema.host/",
+  "@id": "https://schema.host/Union",
+  "name": "Union",
+  "description": "A named, reusable list of types.",
+  "parent": "https://schema.host/DataType",
+  "property": [
+    {
+      "@type": "Property",
+      "@context": "https://schema.host/",
+      "name": "type",
+      "description": "A member type of this union.",
+      "cardinality": "1..n",
+      "type": "https://schema.host/URL"
+    }
+  ]
+}

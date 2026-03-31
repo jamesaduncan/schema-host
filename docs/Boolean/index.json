@@ -1,0 +1,18 @@
+{
+  "@type": "Schema",
+  "@context": "https://schema.host/",
+  "@id": "https://schema.host/Boolean",
+  "name": "Boolean",
+  "description": "A boolean value: true or false.",
+  "parent": "https://schema.host/Enum",
+  "property": [
+    {
+      "@type": "Property",
+      "@context": "https://schema.host/",
+      "name": "value",
+      "description": "A valid boolean value.",
+      "cardinality": "1..n",
+      "type": "https://schema.host/Text"
+    }
+  ]
+}

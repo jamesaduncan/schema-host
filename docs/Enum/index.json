@@ -1,0 +1,18 @@
+{
+  "@type": "Schema",
+  "@context": "https://schema.host/",
+  "@id": "https://schema.host/Enum",
+  "name": "Enum",
+  "description": "A data type whose valid values are explicitly enumerated.",
+  "parent": "https://schema.host/DataType",
+  "property": [
+    {
+      "@type": "Property",
+      "@context": "https://schema.host/",
+      "name": "value",
+      "description": "A valid value for this enumerated type.",
+      "cardinality": "1..n",
+      "type": "https://schema.host/Text"
+    }
+  ]
+}
