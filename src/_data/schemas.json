@@ -107,16 +107,7 @@
         "name": "Boolean",
         "description": "A boolean value: true or false.",
         "parent": "https://schema.host/Enum",
-        "property": [
-            {
-                "@type": "Property",
-                "@context": "https://schema.host/",
-                "name": "value",
-                "description": "A valid boolean value.",
-                "cardinality": "1..n",
-                "type": "https://schema.host/Text"
-            }
-        ]
+        "value": ["true", "false"]
     },
     {
         "@type": "Schema",
@@ -125,16 +116,7 @@
         "name": "Cardinal",
         "description": "The set of valid cardinality values for schema properties.",
         "parent": "https://schema.host/Enum",
-        "property": [
-            {
-                "@type": "Property",
-                "@context": "https://schema.host/",
-                "name": "value",
-                "description": "A valid cardinality value.",
-                "cardinality": "1..n",
-                "type": "https://schema.host/Text"
-            }
-        ]
+        "value": ["1..1", "0..1", "0..n", "1..n"]
     },
     {
         "@type": "Schema",
