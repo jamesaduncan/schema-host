@@ -1,75 +1,40 @@
 {
   "@type": "Schema",
-  "@context": "https://schema.host/Schema",
+  "@context": "https://schema.host/",
   "@id": "https://schema.host/Property",
   "name": "Property",
-  "description": "Microdata that describes a property in a schema.",
+  "description": "A typed property in a schema.",
   "parent": "https://schema.host/Schema",
   "property": [
     {
       "@type": "Property",
       "@context": "https://schema.host/",
       "name": "name",
-      "description": "A name for the property",
-      "cardinality": "1",
+      "description": "The name of the property.",
+      "cardinality": "1..1",
       "type": "https://schema.host/Text"
     },
     {
       "@type": "Property",
       "@context": "https://schema.host/",
       "name": "type",
-      "description": "The type the of the property",
+      "description": "The type URL of the property.",
       "cardinality": "1..n",
-      "type": "https://schema.host/Text"
+      "type": "https://schema.host/URL"
     },
     {
       "@type": "Property",
       "@context": "https://schema.host/",
       "name": "cardinality",
-      "description": "The cardinality of the property",
-      "cardinality": "1",
+      "description": "The cardinality of the property.",
+      "cardinality": "1..1",
       "type": "https://schema.host/Cardinal"
     },
     {
       "@type": "Property",
       "@context": "https://schema.host/",
       "name": "description",
-      "description": "A description of the property",
-      "cardinality": "1",
-      "type": "https://schema.host/Text"
-    },
-    {
-      "@type": "Property",
-      "@context": "https://schema.host/",
-      "name": "default",
-      "description": "A default value for the property. It can either be a plan text value, or a Sessel expression",
-      "cardinality": "0..1",
-      "type": [
-        "https://schema.host/Text",
-        "https://pagelove.org/Sessel"
-      ]
-    },
-    {
-      "@type": "Property",
-      "@context": "https://schema.host/",
-      "name": "unique",
-      "description": "Is this value unique across all items of this type? Used to indicate to validators that no other item of this type should have the same value for this property.",
-      "cardinality": "0..1",
-      "type": "https://schema.host/Boolean"
-    },
-    {
-      "@type": "Property",
-      "@context": "https://schema.host/",
-      "name": "references",
-      "description": "The references property indicates there is a relationship between this property and another schema. This is used to indicate to validators that the value of this property should exist as a property of the referenced type. Formatted as the URL with the schema name and the url fragment set to the property being referenced",
-      "cardinality": "0..1",
-      "type": "https://schema.host/URL"
-    },
-    {
-      "@type": "Property",
-      "@context": "https://schema.host/",
-      "name": "cascade",
-      "description": "Indicates what should happen when a referenced document is deleted or its referenced value changes. Requires the references property to be set. When set to 'true', the cascade action is inferred from the cardinality of the property: required properties cause the referencing document to be deleted, optional properties are cleared. When set to restrict, deletion or modification of the referenced value is blocked if references exist.",
+      "description": "A description of the property.",
       "cardinality": "0..1",
       "type": "https://schema.host/Text"
     }

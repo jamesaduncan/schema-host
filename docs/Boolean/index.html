@@ -6,10 +6,9 @@
         <title>SchemaHost - Boolean</title>
         <link rel="stylesheet" href="/styles.css">
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
-        <script type="module" src="/js/index.mjs"></script>
     </head>
 
-    <body itemid="" itemscope itemtype="https://schema.host/DataType">
+    <body itemid="https://schema.host/Boolean" itemscope itemtype="https://schema.host/Schema">
                 <header>
             <h1>Schema Host</span> - <span itemprop="name">Boolean</span></h1>
             <h2>Validatable HTML microdata schemas</h2>
@@ -21,7 +20,7 @@
                     <a href="/">Home</a>
                 </li>
                 <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <a href="/DataTypes">DataTypes</a>
+                    <a href="/Schemas">Schemas</a>
                 </li>                
                 <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
                     <a id="a" itemprop="Boolean" href="https://schema.host/Boolean">Boolean</a>
@@ -30,33 +29,37 @@
         </nav>
 
         <main>
-            <base itemprop="url" href="https://schema.host/Boolean">
+            <p itemprop="description">A boolean value: true or false.</p>
 
             
-            <p itemprop="description">True, or false</p>
-
-            
-            <p>Inherits from <a href="/DataType">DataType</a></p>
+            <p>Inherits from <a href="/Enum">Enum</a></p>
             
 
-
-            
-            
-                
-                
-                
-                <h2>Additional Properties</h2>
-                <ul>
-                
-                <li>
-                    enumerator: <ul class="set">
-                        <li><span itemprop="enumerator">true</span></li>
+            <table>
+                <caption>Properties of the Boolean schema</caption>
+                <thead>
+                    <tr>
+                        <th>Property Name</th>
+                        <th>Type</th>
+                        <th>Cardinality</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
                     
-                        <li><span itemprop="enumerator">false</span></li>
-                    </ul>
-                </li>
-                
-            </ul>
+                    <tr itemprop="property" itemscope itemtype="https://schema.host/Property">
+                        <td itemprop="name">value</td>
+                        
+                        <td itemprop="type"><a href="/Text">Text</a></td>
+                        
+                        <td itemprop="cardinality">1..n</td>
+                        <td itemprop="description">A valid boolean value.</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+
+        
         </main>
         
         <footer>

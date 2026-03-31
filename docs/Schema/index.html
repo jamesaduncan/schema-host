@@ -6,8 +6,6 @@
         <title>SchemaHost - Schema</title>
         <link rel="stylesheet" href="/styles.css">
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
-        <script type="module" src="/js/index.mjs"></script>
-        <script type="module" src="./index.mjs"></script>
     </head>
 
     <body itemid="https://schema.host/Schema" itemscope itemtype="https://schema.host/Schema">
@@ -31,7 +29,7 @@
         </nav>
 
         <main>
-            <p itemprop="description">Schema.host Microdata Schema</p>
+            <p itemprop="description">A schema that defines typed objects with properties.</p>
 
             
 
@@ -52,7 +50,7 @@
                         
                         <td itemprop="type"><a href="/Text">Text</a></td>
                         
-                        <td itemprop="cardinality">1</td>
+                        <td itemprop="cardinality">1..1</td>
                         <td itemprop="description">The name of the schema.</td>
                     </tr>
                     
@@ -61,8 +59,17 @@
                         
                         <td itemprop="type"><a href="/Text">Text</a></td>
                         
-                        <td itemprop="cardinality">1</td>
-                        <td itemprop="description">the purpose of the schema</td>
+                        <td itemprop="cardinality">0..1</td>
+                        <td itemprop="description">A description of the schema.</td>
+                    </tr>
+                    
+                    <tr itemprop="property" itemscope itemtype="https://schema.host/Property">
+                        <td itemprop="name">parent</td>
+                        
+                        <td itemprop="type"><a href="/URL">URL</a></td>
+                        
+                        <td itemprop="cardinality">0..1</td>
+                        <td itemprop="description">The URL of the parent schema this schema extends.</td>
                     </tr>
                     
                     <tr itemprop="property" itemscope itemtype="https://schema.host/Property">
@@ -71,7 +78,7 @@
                         <td itemprop="type"><a href="/Property">Property</a></td>
                         
                         <td itemprop="cardinality">0..n</td>
-                        <td itemprop="description">properties of a schema</td>
+                        <td itemprop="description">Properties defined by this schema.</td>
                     </tr>
                     
                 </tbody>

@@ -6,8 +6,6 @@
         <title>Schema Host - Validatable HTML microdata schemas</title>
         <link rel="stylesheet" href="/styles.css">
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
-        <script type="module" src="https://jamesaduncan.github.io/schema-elements/index.mjs"></script>
-        <script type="module" src="https://pagelove.org/js/dom-primitives/index.mjs"></script>
     </head>
     <body>
             <header>
@@ -20,52 +18,42 @@
     
         <li itemid="/Text" itemscope itemtype="https://schema.host/DataType">
         <a href="/Text"><span itemprop="name">Text</span></a> 
-            - <span itemprop="description">A string of text</span>
+            - <span itemprop="description">Any string value. The base text type with no format constraints.</span>
+        </li>
+    
+        <li itemid="/String" itemscope itemtype="https://schema.host/DataType">
+        <a href="/String"><span itemprop="name">String</span></a> 
+            - <span itemprop="description">A string value. Inherits from Text with no additional format constraints.</span>
         </li>
     
         <li itemid="/URL" itemscope itemtype="https://schema.host/DataType">
         <a href="/URL"><span itemprop="name">URL</span></a> 
-            - <span itemprop="description">A W3C valid URL</span>
+            - <span itemprop="description">A valid URL.</span>
         </li>
     
         <li itemid="/Number" itemscope itemtype="https://schema.host/DataType">
         <a href="/Number"><span itemprop="name">Number</span></a> 
-            - <span itemprop="description">Validates that something is a Number.</span>
+            - <span itemprop="description">A numeric value, either integer or floating-point.</span>
         </li>
     
         <li itemid="/Integer" itemscope itemtype="https://schema.host/DataType">
         <a href="/Integer"><span itemprop="name">Integer</span></a> 
-            - <span itemprop="description">Validates that something is an Integer.</span>
+            - <span itemprop="description">A 64-bit signed integer.</span>
         </li>
     
         <li itemid="/FloatingPoint" itemscope itemtype="https://schema.host/DataType">
         <a href="/FloatingPoint"><span itemprop="name">FloatingPoint</span></a> 
-            - <span itemprop="description">Validates that something is a floating point number.</span>
-        </li>
-    
-        <li itemid="/Boolean" itemscope itemtype="https://schema.host/DataType">
-        <a href="/Boolean"><span itemprop="name">Boolean</span></a> 
-            - <span itemprop="description">True, or false</span>
+            - <span itemprop="description">An IEEE 754 floating-point number.</span>
         </li>
     
         <li itemid="/DateTime" itemscope itemtype="https://schema.host/DataType">
         <a href="/DateTime"><span itemprop="name">DateTime</span></a> 
-            - <span itemprop="description">ISO8601 Date Time</span>
+            - <span itemprop="description">An RFC 3339 date-time value.</span>
         </li>
     
         <li itemid="/Date" itemscope itemtype="https://schema.host/DataType">
         <a href="/Date"><span itemprop="name">Date</span></a> 
-            - <span itemprop="description">ISO8601 Date</span>
-        </li>
-    
-        <li itemid="/JSON" itemscope itemtype="https://schema.host/DataType">
-        <a href="/JSON"><span itemprop="name">JSON</span></a> 
-            - <span itemprop="description">JSON data</span>
-        </li>
-    
-        <li itemid="/Sessel" itemscope itemtype="https://schema.host/DataType">
-        <a href="/Sessel"><span itemprop="name">Sessel</span></a> 
-            - <span itemprop="description">A Sessel expression</span>
+            - <span itemprop="description">An ISO 8601 date (YYYY-MM-DD).</span>
         </li>
     
     </ul>

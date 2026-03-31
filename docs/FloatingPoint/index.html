@@ -6,7 +6,6 @@
         <title>SchemaHost - FloatingPoint</title>
         <link rel="stylesheet" href="/styles.css">
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
-        <script type="module" src="/js/index.mjs"></script>
     </head>
 
     <body itemid="" itemscope itemtype="https://schema.host/DataType">
@@ -31,17 +30,27 @@
 
         <main>
             <base itemprop="url" href="https://schema.host/FloatingPoint">
+            <p itemprop="description">An IEEE 754 floating-point number.</p>
 
             
-            <p itemprop="description">Validates that something is a floating point number.</p>
-
-            
-            <p>Inherits from <a href="/DataType">DataType</a></p>
+            <p>Inherits from <a href="/Number">Number</a></p>
             
 
 
             
             
+                
+                
+                
+                <h2>Additional Properties</h2>
+                <ul>
+                
+                <li>
+                    matches: <ul class="set">
+                        <li><span itemprop="matches">^-?[0-9]+\.[0-9]+([eE][+-]?[0-9]+)?$</span></li>
+                    </ul>
+                </li>
+                
             </ul>
         </main>
         
