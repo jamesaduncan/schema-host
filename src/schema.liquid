@@ -71,7 +71,16 @@ permalink: "/{{ schema.name }}/"
                 </tbody>
             </table>
 
-        
+            {% if schema.value %}
+            <h3>Valid Values</h3>
+            <ul>
+                {% for val in schema.value %}
+                <li itemprop="value">{{ val }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+
         </main>
         
         {% render "footer.liquid" with schema as object %}
