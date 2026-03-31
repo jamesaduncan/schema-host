@@ -39,6 +39,7 @@ permalink: "/{{ schema.name }}/"
             <p>Inherits from <a href="/{{ schema.parent | split: '/' | last }}">{{ schema.parent | split: '/' | last }}</a></p>
             {% endif %}
 
+            {% if schema.property %}
             <table>
                 <caption>Properties of the {{ schema.name }} schema</caption>
                 <thead>
@@ -70,6 +71,7 @@ permalink: "/{{ schema.name }}/"
                     {% endfor %}
                 </tbody>
             </table>
+            {% endif %}
 
             {% if schema.value %}
             <h3>Valid Values</h3>
